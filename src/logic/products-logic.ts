@@ -26,9 +26,9 @@ async function addProductAsync(product: ProductModel, image: UploadedFile) {
     if (image) {
         const extension = image.name.substr(image.name.lastIndexOf("."));
         product.imageName = product._id + extension;
-        absolutePath = path.join(__dirname, "..", "assets", "images", "products", product.imageName);
+        absolutePath = path.join(__dirname, "..", "assets", "images",  product.imageName);
     }
-    if (!product.scentCategory) product.scentCategory = null;
+    
     const errors = product.validateSync();
     if (errors) throw errors.message;
     if (image) await image.mv(absolutePath);
@@ -37,15 +37,15 @@ async function addProductAsync(product: ProductModel, image: UploadedFile) {
 async function updateProductAsync(product: ProductModel, image: UploadedFile) {
     if (image) {
         if (product.imageName !== "logo-donaroma.webp") {
-            const deletePath = path.join(__dirname, "..", "assets", "images", "products", product.imageName);
+            const deletePath = path.join(__dirname, "..", "assets", "images",  product.imageName);
             safeDelete(deletePath);
         }
         const extension = image.name.substr(image.name.lastIndexOf("."));
         product.imageName = product._id + extension;
-        const absolutePath = path.join(__dirname, "..", "assets", "images", "products", product.imageName);
+        const absolutePath = path.join(__dirname, "..", "assets", "images", product.imageName);
         await image.mv(absolutePath);
     }
-    return Product.findByIdAndUpdate(new mongoose.Types.ObjectId(product._id), { ...product }, { new: true }).populate("category").populate("scentCategory").exec();
+    return Product.findByIdAndUpdate(new mongoose.Types.ObjectId(product._id), { ...product }, { new: true ,runValidators:true}).populate("category").populate("scentCategory").exec();
 
 }
 
@@ -53,7 +53,7 @@ async function deleteProductAsync(_id: string) {
     const imgFormats = ['.jpg', '.jpeg', '.png', '.gif', '.webp'];
     imgFormats.forEach(f => {
         const fileName = _id + f;
-        const filePath = path.join(__dirname, "..", "assets", "images", "products", fileName);
+        const filePath = path.join(__dirname, "..", "assets", "images",  fileName);
         safeDelete(filePath);
     })
     return Product.deleteOne({ _id }).exec();

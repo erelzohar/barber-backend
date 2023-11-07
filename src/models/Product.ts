@@ -52,6 +52,9 @@ const ProductSchema = new Schema({
     },
     scents:{
         type:Array,
+    },
+    isRecommended:{
+        type:Boolean
     }
 
 }, { versionKey: false, toObject: { virtuals: true }, toJSON: { virtuals: true }, id: false });
