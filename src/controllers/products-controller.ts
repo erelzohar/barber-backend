@@ -68,11 +68,7 @@ router.post("/", verifyAdmin, async (req, res) => {
         }
         const image = req.files && req.files.image ? req.files.image : null;
         const productToUpsert = new Product(req.body);
-        if (productToUpsert.description?.length < 2) productToUpsert.description = productToUpsert.name + " מבית דון ארומה";
-            console.log(productToUpsert.category === new mongoose.Schema.Types.ObjectId("650acfabc4c0c3b0a4da8ad3"));
-            
-
-
+        if (productToUpsert.description?.length < 2) productToUpsert.description = productToUpsert.name + " מבית דון ארומה";            
         if (req.body._id) {
             const updatedProduct = await productsLogic.updateProductAsync(productToUpsert, image as UploadedFile);
             return res.json(updatedProduct);
@@ -82,8 +78,6 @@ router.post("/", verifyAdmin, async (req, res) => {
         res.json(addedProduct);
     }
     catch (err) {
-        console.log(err);
-
         res.status(500).json(getError(err as Error));
     }
 });

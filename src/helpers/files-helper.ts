@@ -6,7 +6,7 @@ export default function safeDelete(absolutePath:string) {
         fs.unlinkSync(absolutePath);
     }
     catch(err) {
-        console.log(err);
+        return err;
     }
 }
 
