@@ -4,7 +4,6 @@ import { JwtPayload, verify } from "jsonwebtoken";
 
 function verifyAdmin(req: Request, res: Response, next: NextFunction) {
 
-    //"Bearer the-token"
     try {
         if (!req.headers.authorization) return res.status(403).send("You are not an admin.");
         const token = req.headers.authorization.split(" ")[1];

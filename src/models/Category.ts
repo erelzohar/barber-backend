@@ -32,9 +32,9 @@ const CategorySchema = new Schema({
 
 
 CategorySchema.virtual("products", {
-    ref: "Product", // Model?
-    localField: "_id", // relation's local field
-    foreignField: "category" // relation's foreign field
+    ref: "Product", 
+    localField: "_id", 
+    foreignField: "category" 
 });
 
 export default mongoose.model<CategoryModel>("Category", CategorySchema, "categories");

@@ -14,8 +14,8 @@ app.use(expressFileUpload());
 app.use(cors({origin:"*"}));
 
 app.use("/", expressRateLimit({
-    windowMs: 5000, // 1 second
-    max: 100, // limit each IP to 5 requests per windowMs
+    windowMs: 5000, 
+    max: 100, 
     message: "Are You a Hacker?" 
 }));
 
@@ -28,8 +28,6 @@ app.use("/api/products",productsController);
 app.use("/api/auth",authController);
 app.use("/api/message",messagesController);
 
-
-mongoose.set("debug",true)
 
 mongoose.connect(config.mongo.url, { retryWrites: true, w: "majority" })
     .then(() => {
