@@ -5,11 +5,9 @@
   "main": "index.js",
   "scripts": {
     "postinstall": "tsc",
-    "build":"tsc",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node build/app.js"
   },
-  "author": "",
+  "author": "EZ webs",
   "license": "ISC",
   "dependencies": {
     "@types/cors": "^2.8.13",
