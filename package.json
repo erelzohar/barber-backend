@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "postinstall": "tsc & npm run copy",
-    "copy":"copyfiles src/assets/images/* build/assets/images/",
+    "copy":"copyfiles -u 3 src/assets/images/* build/assets/images/",
     "start": "node build/app.js"
   },
   "author": "EZ webs",
