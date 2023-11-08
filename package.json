@@ -4,9 +4,9 @@
   "description": "EZ",
   "main": "index.js",
   "scripts": {
-    "postinstall": "tsc",
+    "postinstall": "tsc & npm run copy",
     "copy":"copyfiles src/assets/images/* build/assets/images/",
-    "start": "npm run copy & node build/app.js"
+    "start": "node build/app.js"
   },
   "author": "EZ webs",
   "license": "ISC",
