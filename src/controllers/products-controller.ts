@@ -6,7 +6,6 @@ import getError from "../helpers/errors-helper";
 import path from "path";
 import fs from 'fs';
 import verifyAdmin from "../middleware/verifyAdmin";
-import mongoose from "mongoose";
 
 const router = express.Router();
 
@@ -81,8 +80,6 @@ router.post("/", async (req, res) => {
         res.json(addedProduct);
     }
     catch (err) {
-        console.log(err);
-        
         res.status(500).json(getError(err as Error));
     }
 });

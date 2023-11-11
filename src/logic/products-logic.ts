@@ -43,7 +43,6 @@ async function addProductAsync(product: ProductModel, images: UploadedFile[] = n
 async function updateProductAsync(product: ProductModel, images: UploadedFile[], imagesToDelete: string[]) {
     if (images?.length > 0) {
         let absolutePath;
-        console.log(images);
         
         if (product.images[0] === "logo-donaroma.webp") product.images.splice(0,1);
         images.forEach(async i => {            
@@ -54,7 +53,6 @@ async function updateProductAsync(product: ProductModel, images: UploadedFile[],
             await i.mv(absolutePath);
         })
     }
-    console.log(imagesToDelete);
     
     if (imagesToDelete?.length) {
         imagesToDelete.forEach(i => {
