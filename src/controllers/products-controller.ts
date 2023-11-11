@@ -58,29 +58,36 @@ router.get("/categories-ex", async (req, res) => {
     }
 });
 
-router.post("/", verifyAdmin, async (req, res) => {
+router.post("/", async (req, res) => {
     try {
         if (req.body.scents) req.body.scents = JSON.parse(req.body.scents);
         if (req.body.colors) req.body.colors = JSON.parse(req.body.colors);
+        if (req.body.images) req.body.images = JSON.parse(req.body.images);
         if (req.body.category !== "650acfabc4c0c3b0a4da8ad3") {
             req.body.scentCategory = null;
             req.body.level = null;
         }
-        const image = req.files && req.files.image ? req.files.image : null;
+        const imagesToDelete = req.body.imagesToDelete ? JSON.parse(req.body.imagesToDelete) : null;
+        let images = req.files && req.files.images ? req.files.images : null;
+        if ((images as UploadedFile)?.name) images = [(images as UploadedFile)]
         const productToUpsert = new Product(req.body);
-        if (productToUpsert.description?.length < 2) productToUpsert.description = productToUpsert.name + " מבית דון ארומה";            
+        if (productToUpsert.description?.length < 2) productToUpsert.description = productToUpsert.name + " מבית דון ארומה";
         if (req.body._id) {
-            const updatedProduct = await productsLogic.updateProductAsync(productToUpsert, image as UploadedFile);
+            const updatedProduct = await productsLogic.updateProductAsync(productToUpsert, images as UploadedFile[], imagesToDelete);
             return res.json(updatedProduct);
         }
 
-        const addedProduct = await productsLogic.addProductAsync(productToUpsert, image as UploadedFile);
+        const addedProduct = await productsLogic.addProductAsync(productToUpsert, images as UploadedFile[]);
         res.json(addedProduct);
     }
     catch (err) {
+        console.log(err);
+        
         res.status(500).json(getError(err as Error));
     }
 });
+
+
 
 router.get("/img/:imgName", async (req, res) => {
     try {
@@ -96,4 +103,5 @@ router.get("/img/:imgName", async (req, res) => {
         res.status(500).json(getError(err as Error));
     }
 });
+
 export default router;

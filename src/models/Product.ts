@@ -4,13 +4,13 @@ interface ProductI {
     name: string;
     price: number;
     category: Schema.Types.ObjectId;
-    imageName: string;
     colors: string[];
     description: string;
     scentCategory:Schema.Types.ObjectId;
     level:number;
     scents:string[];
     isRecommended:boolean;
+    images:string[];
 }
 
 export interface ProductModel extends ProductI, Document<string> { }
@@ -33,10 +33,6 @@ const ProductSchema = new Schema({
         ref: "Category",
         required: [true, "Missing category"]
     },
-    imageName: {
-        type: String,
-        required: [true, "Missing imageName"]
-    },
     colors: {
         type: Array
     },
@@ -55,6 +51,9 @@ const ProductSchema = new Schema({
     },
     isRecommended:{
         type:Boolean
+    },
+    images:{
+        type:Array
     }
 
 }, { versionKey: false, toObject: { virtuals: true }, toJSON: { virtuals: true }, id: false });
