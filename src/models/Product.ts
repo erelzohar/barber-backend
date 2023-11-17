@@ -11,6 +11,7 @@ interface ProductI {
     scents:string[];
     isRecommended:boolean;
     images:string[];
+    stock:number;
 }
 
 export interface ProductModel extends ProductI, Document<string> { }
@@ -54,6 +55,12 @@ const ProductSchema = new Schema({
     },
     images:{
         type:Array
+    },
+    stock:{
+        type:Number,
+        required:[true,"missing stock units"],
+        min:-1,
+        max:10000
     }
 
 }, { versionKey: false, toObject: { virtuals: true }, toJSON: { virtuals: true }, id: false });

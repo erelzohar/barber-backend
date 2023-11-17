@@ -5,13 +5,15 @@
   "main": "index.js",
   "scripts": {
     "postinstall": "tsc & npm run copy",
-    "copy":"copyfiles -u 3 src/assets/images/* build/assets/images/",
+    "copy": "copyfiles -u 3 src/assets/images/* build/assets/images/",
     "start": "node build/app.js",
-    "startDev":"nodemon"
+    "startDev": "nodemon"
   },
   "author": "EZ webs",
   "license": "ISC",
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.451.0",
+    "@aws-sdk/s3-request-presigner": "^3.451.0",
     "@types/cors": "^2.8.13",
     "@types/express": "^4.17.17",
     "@types/express-fileupload": "^1.4.1",
@@ -21,12 +23,13 @@
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
-    "express-fileupload": "^1.4.0",
+    "express-fileupload": "^1.4.2",
     "express-rate-limit": "^6.7.0",
     "jsonwebtoken": "^9.0.1",
     "mongoose": "^7.3.1",
     "mongoose-unique-validator": "^4.0.0",
     "nodemon": "^2.0.22",
+    "sharp": "^0.32.6",
     "striptags": "^3.2.0",
     "ts-node": "^10.9.1",
     "typescript": "^5.1.6",
@@ -35,6 +38,7 @@
   "devDependencies": {
     "@types/jsonwebtoken": "^9.0.2",
     "@types/mongoose-unique-validator": "^1.0.7",
+    "@types/multer": "^1.4.10",
     "@types/validator": "^13.7.17"
   }
 }
