@@ -1,4 +1,4 @@
-import {config} from "./config";
+import { config } from "./config";
 import express, { Request, Response } from "express";
 import mongoose from "mongoose";
 import cors from "cors";
@@ -8,17 +8,21 @@ import productsController from "./controllers/products-controller";
 import authController from "./controllers/auth-controller";
 import messagesController from "./controllers/messages-controller";
 import paymentController from './controllers/payment-controller';
-
+import bodyParser from "body-parser";
 const app = express();
+app.use(bodyParser.json());
 
+app.use(bodyParser.json({ type: 'application/*+json' }))
+
+var urlencodedParser = bodyParser.urlencoded({ extended: false })
 app.use(express.json());
 app.use(expressFileUpload());
-app.use(cors({origin:"*"}));
+app.use(cors({ origin: "*" }));
 
 app.use("/", expressRateLimit({
-    windowMs: 5000, 
-    max: 100, 
-    message: "Are You a Hacker?" 
+    windowMs: 5000,
+    max: 100,
+    message: "Are You a Hacker?"
 }));
 
 
@@ -26,10 +30,10 @@ app.get("/", (req: Request, res: Response) => {
     res.json("TSNODE");
 });
 
-app.use("/api/products",productsController);
-app.use("/api/auth",authController);
-app.use("/api/message",messagesController);
-app.use("/api/meshulam-test",paymentController);
+app.use("/api/products", productsController);
+app.use("/api/auth", authController);
+app.use("/api/message", messagesController);
+app.use("/api/meshulam-test", paymentController,urlencodedParser);
 
 
 mongoose.connect(config.mongo.url, { retryWrites: true, w: "majority" })
