@@ -12,6 +12,7 @@ interface ProductI {
     isRecommended:boolean;
     images:string[];
     stock:number;
+    sortIndex:number;
 }
 
 export interface ProductModel extends ProductI, Document<string> { }
@@ -60,6 +61,11 @@ const ProductSchema = new Schema({
         type:Number,
         required:[true,"missing stock units"],
         min:-1,
+        max:10000
+    },
+    sortIndex:{
+        type:Number,
+        min:0,
         max:10000
     }
 

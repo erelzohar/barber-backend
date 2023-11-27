@@ -2,12 +2,13 @@ import { UploadedFile } from "express-fileupload";
 import Category from "../models/Category";
 import Product, { ProductModel } from "../models/Product";
 import ScentCategory from "../models/ScentCategory";
-import mongoose from "mongoose";
+import mongoose, { ObjectId } from "mongoose";
 import { randomUUID } from "crypto";
 import { config } from "../config";
-import { S3Client, PutObjectCommand, DeleteObjectCommand, HeadObjectCommand, GetObjectCommand } from "@aws-sdk/client-s3";
+import { S3Client, PutObjectCommand, DeleteObjectCommand, GetObjectCommand } from "@aws-sdk/client-s3";
 import sharp from "sharp";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import { CartAction } from "../models/CartAction";
 
 
 const s3 = new S3Client({
@@ -44,10 +45,11 @@ async function addProductAsync(product: ProductModel, images: UploadedFile[] = n
             product.images.push(imageName);
             const buffer = await sharp(i.data)
                 .resize(1500, 1500, {
-                    fit: 'cover',
+                    fit: 'contain',
+                    background:{r: 0, g: 0, b: 0, alpha: 0}
                 })
                 .toFormat("webp")
-                .webp({ quality: 70 })
+                .webp({ quality: 60 })
                 .toBuffer()
             const command = new PutObjectCommand({
                 Bucket: config.aws.bucketName,
@@ -69,10 +71,11 @@ async function updateProductAsync(product: ProductModel, images: UploadedFile[],
             product.images.push(imageName);
             const buffer = await sharp(i.data)
                 .resize(700, 700, {
-                    fit: 'cover',
+                    fit: 'contain',
+                    background:{r: 0, g: 0, b: 0, alpha: 0}
                 })
                 .toFormat("webp")
-                .webp({ quality: 70 })
+                .webp({ quality: 60 })
                 .toBuffer();
             const command = new PutObjectCommand({
                 Bucket: config.aws.bucketName,
@@ -124,7 +127,10 @@ async function getImageAsync(imageName: string) {
     const url = await getSignedUrl(s3, command, { expiresIn: 1800 });    
     return url;
 }
+async function updateStock(action:CartAction) {
+    return Product.findByIdAndUpdate(new mongoose.Types.ObjectId(action.productId), { stock:action.updatedStock }, { new: true, runValidators: true }).populate("category").populate("scentCategory").exec();
 
+}
 export default {
     getAllProductsAsync,
     addProductAsync,
@@ -133,5 +139,6 @@ export default {
     getScentCategoriesAsync,
     deleteProductAsync,
     updateProductAsync,
-    getImageAsync
+    getImageAsync,
+    updateStock
 }

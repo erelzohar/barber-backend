@@ -7,6 +7,8 @@ import expressFileUpload from "express-fileupload";
 import productsController from "./controllers/products-controller";
 import authController from "./controllers/auth-controller";
 import messagesController from "./controllers/messages-controller";
+import paymentController from './controllers/payment-controller';
+
 const app = express();
 
 app.use(express.json());
@@ -27,6 +29,7 @@ app.get("/", (req: Request, res: Response) => {
 app.use("/api/products",productsController);
 app.use("/api/auth",authController);
 app.use("/api/message",messagesController);
+app.use("/api/meshulam-test",paymentController);
 
 
 mongoose.connect(config.mongo.url, { retryWrites: true, w: "majority" })
