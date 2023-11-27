@@ -8,13 +8,8 @@ import productsController from "./controllers/products-controller";
 import authController from "./controllers/auth-controller";
 import messagesController from "./controllers/messages-controller";
 import paymentController from './controllers/payment-controller';
-import bodyParser from "body-parser";
 const app = express();
-app.use(bodyParser.json());
 
-app.use(bodyParser.json({ type: 'application/*+json' }))
-
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
 app.use(express.json());
 app.use(expressFileUpload());
 app.use(cors({ origin: "*" }));
@@ -33,7 +28,7 @@ app.get("/", (req: Request, res: Response) => {
 app.use("/api/products", productsController);
 app.use("/api/auth", authController);
 app.use("/api/message", messagesController);
-app.use("/api/meshulam-test", paymentController,urlencodedParser);
+app.use("/api/meshulam-test", paymentController);
 
 
 mongoose.connect(config.mongo.url, { retryWrites: true, w: "majority" })
