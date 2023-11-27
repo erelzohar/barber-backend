@@ -5,7 +5,7 @@ const router= express.Router()
 
 router.post("/payment", async (req, res) => {
     try {
-        console.log(req.body);
+        console.log(req);
         res.sendStatus(200)
     }
     catch (err) {
