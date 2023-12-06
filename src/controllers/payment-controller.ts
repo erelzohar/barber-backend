@@ -21,13 +21,13 @@ router.post("/payment", urlencodedParser, async (req, res) => {
         
         const transaction = new Transaction(req.body);
         if (transaction.status === '0') return res.sendStatus(200)
-        const order = req.body['data[cField1]'] ? JSON.parse(req.body['data[cField1]']) : null;
+        const order = req.body['data[customFields][cField1]'] ? JSON.parse(req.body['data[customFields][cField1]']) : null;
 
 
         // transaction.data.orderId = req.body['data[cField1]'];
         console.log(transaction);
         console.log(order);
-        console.log(req.body['data[cField1]']);
+        console.log(req.body['data[customFields][cField1]']);
 
         res.sendStatus(200)
     }
