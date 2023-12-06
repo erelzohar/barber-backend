@@ -4,7 +4,7 @@ import bodyParser from "body-parser";
 import PaymentFormRequest from "../models/PaymentFormRequest";
 import paymentsLogic from "../logic/payments-logic";
 import Transaction from "../models/Transaction";
-import ordersLogic from "logic/orders-logic";
+import ordersLogic from "../logic/orders-logic";
 
 const router = express.Router()
 router.use(bodyParser.json());
