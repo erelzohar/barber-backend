@@ -14,8 +14,8 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false })
 router.post("/payment", urlencodedParser, async (req, res) => {
     try {
 
-        const data = JSON.parse(req.body);
-        console.log(data);
+        //const data = JSON.parse(req.body);
+        console.log(req.body['data[asmachta]']);
         //console.log(data['data[asmachta]']);
 
         //const transaction = new Transaction(req.body);
@@ -25,6 +25,8 @@ router.post("/payment", urlencodedParser, async (req, res) => {
         res.sendStatus(200)
     }
     catch (err) {
+        console.log(err);
+        
         res.status(500).json(getError(err as Error));
     }
 });
