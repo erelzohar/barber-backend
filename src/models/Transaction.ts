@@ -3,30 +3,30 @@ import mongoose, { Document, Schema } from "mongoose";
 export interface ITransaction {
     err: any;
     status: string;
-    'data[asmachta]': string;
-    'data[cardSuffix]': string;
-    'data[cardType]': string;
-    'data[cardTypeCode]': string;
-    'data[cardBrand]': string;
-    'data[cardBrandCode]': string;
-    'data[cardExp]': string;
-    'data[firstPaymentSum]': string;
-    'data[periodicalPaymentSum]': string;
-    'data[statusCode]': string;
-    'data[transactionTypeId]': string;
-    'data[paymentType]': string;
-    'data[sum]': string;
-    'data[paymentsNum]': string;
-    'data[paymentDate]': string;
-    'data[description]': string;
-    'data[fullName]': string;
-    'data[payerPhone]': string;
-    'data[allPaymentsNum]': string;
-    'data[payerEmail]': string;
-    'data[transactionId]': string;
-    'data[transactionToken]': string;
-    'data[processId]': string;
-    'data[processToken]': string;
+    asmachta: string;
+    cardSuffix: string;
+    cardType: string;
+    cardTypeCode: string;
+    cardBrand: string;
+    cardBrandCode: string;
+    cardExp: string;
+    firstPaymentSum: string;
+    periodicalPaymentSum: string;
+    statusCode: string;
+    transactionTypeId: string;
+    paymentType: string;
+    sum: string;
+    paymentsNum: string;
+    paymentDate: string;
+    description: string;
+    fullName: string;
+    payerPhone: string;
+    allPaymentsNum: string;
+    payerEmail: string;
+    transactionId: string;
+    transactionToken: string;
+    processId: string;
+    processToken: string;
     orderId: string;
 
 
@@ -36,8 +36,77 @@ export interface TransactionModel extends ITransaction, Document<string> { }
 
 const TransactionScheme: Schema = new Schema({
 
-    data: {
-        type: Object
+    asmachta: {
+        type: String
+    },
+    cardSuffix: {
+        type: String
+    },
+    payerEmail: {
+        type: String
+    },
+    transactionId: {
+        type: String
+    },
+    transactionToken: {
+        type: String
+    },
+    processId: {
+        type: String
+    },
+    processToken: {
+        type: String
+    },
+    cardType: {
+        type: String
+    },
+    cardTypeCode: {
+        type: String
+    },
+    cardBrand: {
+        type: String
+    },
+    cardBrandCode: {
+        type: String
+    },
+    cardExp: {
+        type: String
+    },
+    firstPaymentSum: {
+        type: String
+    },
+    periodicalPaymentSum: {
+        type: String
+    },
+    statusCode: {
+        type: String
+    },
+    transactionTypeId: {
+        type: String
+    },
+    paymentType: {
+        type: String
+    },
+    sum: {
+        type: String
+    },
+    paymentsNum: {
+        type: String
+    },
+    paymentDate: {
+        type: String
+    },
+    fullName: {
+        type: String
+    },
+    description: {
+        type: String
+    },
+    payerPhone: {
+        type: String
+    },
+    allPaymentsNum: {
+        type: String
     },
     status: {
         type: String
