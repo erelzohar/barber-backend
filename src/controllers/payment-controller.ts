@@ -18,15 +18,19 @@ router.post("/payment", urlencodedParser, async (req, res) => {
         console.log(req.body['data[asmachta]']);
         //console.log(data['data[asmachta]']);
 
-        //const transaction = new Transaction(req.body);
-        // transaction.data.orderId = req.body.data.cField1
-        //console.log(transaction);
+        const transaction = new Transaction(req.body);
+        const order = req.body['data[cField1]'] ? JSON.parse(req.body['data[cField1]']) : null;
+
+
+        // transaction.data.orderId = req.body['data[cField1]'];
+        console.log(transaction);
+        console.log(order);
 
         res.sendStatus(200)
     }
     catch (err) {
         console.log(err);
-        
+
         res.status(500).json(getError(err as Error));
     }
 });
