@@ -10,6 +10,7 @@ export interface IOrder {
     fullName: string;
     phone: string;
     email: string;
+    orderNumber: string;
     orderDate: string;
     done: boolean;
 }
@@ -46,6 +47,9 @@ const OrderScheme: Schema = new Schema({
         type: String
     },
     orderDate: {
+        type: String
+    },
+    orderNumber: {
         type: String
     },
     done: {
