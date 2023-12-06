@@ -14,12 +14,6 @@ router.use(bodyParser.json({ type: 'application/*+json' }))
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 router.post("/payment", urlencodedParser, async (req, res) => {
     try {
-
-        //const data = JSON.parse(req.body);
-        console.log(req.body['data[asmachta]']);
-        //console.log(data['data[asmachta]']);
-        console.log(req.body);
-
         const transaction = new Transaction(req.body);
         if (transaction.status === '0') return res.sendStatus(200)
         transaction.asmachta = req.body['data[asmachta]'];
@@ -47,19 +41,13 @@ router.post("/payment", urlencodedParser, async (req, res) => {
         transaction.processId = req.body['data[processId]'];
         transaction.processToken = req.body['data[processToken]'];
         const order = req.body['data[customFields][cField1]'] ? JSON.parse(req.body['data[customFields][cField1]']) : null;
-        // const addedOrder = await ordersLogic.createOrderAsync(order);
-        // transaction.orderId = addedOrder._id;
-        // await transaction.save()
-        // transaction.data.orderId = req.body['data[cField1]'];
-        console.log(transaction);
-        console.log(order);
-        console.log(req.body['data[customFields][cField1]']);
-
+        const addedOrder = await ordersLogic.createOrderAsync(order);
+        transaction.orderId = addedOrder._id;
+        await transaction.save();
         res.sendStatus(200)
     }
     catch (err) {
         console.log(err);
-
         res.status(500).json(getError(err as Error));
     }
 });
