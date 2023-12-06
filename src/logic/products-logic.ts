@@ -2,13 +2,14 @@ import { UploadedFile } from "express-fileupload";
 import Category from "../models/Category";
 import Product, { ProductModel } from "../models/Product";
 import ScentCategory from "../models/ScentCategory";
-import mongoose, { ObjectId } from "mongoose";
+import mongoose from "mongoose";
 import { randomUUID } from "crypto";
 import { config } from "../config";
 import { S3Client, PutObjectCommand, DeleteObjectCommand, GetObjectCommand } from "@aws-sdk/client-s3";
 import sharp from "sharp";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { CartAction } from "../models/CartAction";
+import Sale, { SaleModel } from "../models/Sale";
 
 
 const s3 = new S3Client({
@@ -20,7 +21,10 @@ const s3 = new S3Client({
 });
 
 function getAllProductsAsync() {
-    return Product.find().populate("category").populate("scentCategory").exec();
+    return Product.find().populate("category").populate("scentCategory").populate('sales').exec();
+}
+function getAllSalesAsync() {
+    return Sale.find().exec();
 }
 function getCategoriesAsync() {
     return Category.find().exec();
@@ -46,7 +50,7 @@ async function addProductAsync(product: ProductModel, images: UploadedFile[] = n
             const buffer = await sharp(i.data)
                 .resize(1500, 1500, {
                     fit: 'contain',
-                    background:{r: 0, g: 0, b: 0, alpha: 0}
+                    background: { r: 0, g: 0, b: 0, alpha: 0 }
                 })
                 .toFormat("webp")
                 .webp({ quality: 60 })
@@ -59,8 +63,8 @@ async function addProductAsync(product: ProductModel, images: UploadedFile[] = n
             });
             await s3.send(command);
         })
-    }    
-    return (await (await product.save()).populate('category')).populate('scentCategory');
+    }
+    return (await (await (await product.save()).populate('category')).populate('scentCategory')).populate('sales');
 }
 async function updateProductAsync(product: ProductModel, images: UploadedFile[], imagesToDelete: string[]) {
     if (images?.length > 0) {
@@ -72,7 +76,7 @@ async function updateProductAsync(product: ProductModel, images: UploadedFile[],
             const buffer = await sharp(i.data)
                 .resize(700, 700, {
                     fit: 'contain',
-                    background:{r: 0, g: 0, b: 0, alpha: 0}
+                    background: { r: 0, g: 0, b: 0, alpha: 0 }
                 })
                 .toFormat("webp")
                 .webp({ quality: 60 })
@@ -100,8 +104,23 @@ async function updateProductAsync(product: ProductModel, images: UploadedFile[],
         });
     }
     if (!product.images || product.images?.length === 0) product.images = ["logo-donaroma.webp"];
-    return Product.findByIdAndUpdate(new mongoose.Types.ObjectId(product._id), { ...product }, { new: true, runValidators: true }).populate("category").populate("scentCategory").exec();
+    return Product.findByIdAndUpdate(new mongoose.Types.ObjectId(product._id), { ...product }, { new: true, runValidators: true }).populate("category").populate("scentCategory").populate('sales').exec();
 
+}
+
+async function addSaleAsync(sale: SaleModel) {
+    const errors = sale.validateSync();
+    if (errors) throw errors;
+    if ((sale.type === 'percent' && !sale.saleData.includes('%'))
+        || (sale.type === 'quantity' && !sale.saleData.includes('in'))
+        || (sale.type === 'plus' && !sale.saleData.includes('+'))) {
+        throw new Error('wrong sale data');
+    }
+    return await sale.save();
+}
+
+async function deleteSaleAsync(_id: string) {
+    return Sale.deleteOne({ _id }).exec();
 }
 
 async function deleteProductAsync(_id: string) {
@@ -124,11 +143,11 @@ async function getImageAsync(imageName: string) {
         Key: imageName
     }
     const command = new GetObjectCommand(getObjectParams)
-    const url = await getSignedUrl(s3, command, { expiresIn: 1800 });    
+    const url = await getSignedUrl(s3, command, { expiresIn: 1800 });
     return url;
 }
-async function updateStock(action:CartAction) {
-    return Product.findByIdAndUpdate(new mongoose.Types.ObjectId(action.productId), { stock:action.updatedStock }, { new: true, runValidators: true }).populate("category").populate("scentCategory").exec();
+async function updateStock(action: CartAction) {
+    return Product.findByIdAndUpdate(new mongoose.Types.ObjectId(action.productId), { stock: action.updatedStock }, { new: true, runValidators: true }).populate("category").populate("scentCategory").populate('sales').exec();
 
 }
 export default {
@@ -140,5 +159,8 @@ export default {
     deleteProductAsync,
     updateProductAsync,
     getImageAsync,
-    updateStock
+    updateStock,
+    deleteSaleAsync,
+    addSaleAsync,
+    getAllSalesAsync
 }

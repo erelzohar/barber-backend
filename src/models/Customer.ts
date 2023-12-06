@@ -1,6 +1,4 @@
 import mongoose, { Document, Schema } from "mongoose";
-// import mongooseUniqueValidator from "mongoose-unique-validator";
-// import isEmail from "validator";
 
 export interface ICustomer {
     firstName:string;
@@ -18,19 +16,19 @@ const CustomerScheme: Schema = new Schema({
 
     firstName: {
         type: String,
-        required: [true, "Missing username"],
+        required: [true, "Missing firstName"],
         minlength: [2, "Min 2 characters"],
         maxlength: [30, "Max 30 characters"],
     },
     lastName: {
         type: String,
-        required: [true, "Missing username"],
+        required: [true, "Missing lastName"],
         minlength: [2, "Min 2 characters"],
         maxlength: [30, "Max 30 characters"],
     },
     phone: {
         type: String,
-        required: [true, "Missing username"],
+        required: [true, "Missing phone"],
         minlength: [9, "Min 9 characters"],
         maxlength: [13, "Max 13 characters"],
     },

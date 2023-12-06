@@ -6,6 +6,7 @@ import getError from "../helpers/errors-helper";
 import path from "path";
 import verifyAdmin from "../middleware/verifyAdmin";
 import { CartAction } from "../models/CartAction";
+import Sale from "../models/Sale";
 
 const router = express.Router();
 router.get("/", async (req, res) => {
@@ -56,11 +57,14 @@ router.get("/categories-ex", async (req, res) => {
     }
 });
 
-router.post("/",verifyAdmin, async (req, res) => {
+router.post("/", verifyAdmin, async (req, res) => {
     try {
+        console.log(req.body);
+        
         if (req.body.scents) req.body.scents = JSON.parse(req.body.scents);
         if (req.body.colors) req.body.colors = JSON.parse(req.body.colors);
         if (req.body.images) req.body.images = JSON.parse(req.body.images);
+        if (req.body.sales) req.body.sales = JSON.parse(req.body.sales);
         if (req.body.category !== "650acfabc4c0c3b0a4da8ad3") {
             req.body.scentCategory = null;
             req.body.level = null;
@@ -94,21 +98,36 @@ router.post("/cart-action", async (req, res) => {
         res.status(500).json(getError(err as Error));
     }
 });
-router.post("/cart-action", async (req, res) => {
+
+router.get("/sales", async (req, res) => {
     try {
-        const action = new CartAction();
-        action.productId = req.body.productId;
-        action.updatedStock = +req.body.updatedStock;
-        const updated = await productsLogic.updateStock(action);
-        res.json(updated);
+        const sales = await productsLogic.getAllSalesAsync();        
+        res.json(sales);
     }
     catch (err) {
         res.status(500).json(getError(err as Error));
     }
 });
-
-
-
+router.post("/sales", verifyAdmin, async (req, res) => {
+    try {
+        const sale = new Sale(req.body);
+        const addedSale = await productsLogic.addSaleAsync(sale);
+        res.json(addedSale);
+    }
+    catch (err) {
+        res.status(500).json(getError(err as Error));
+    }
+});
+router.delete("/sales/:saleId", verifyAdmin, async (req, res) => {
+    try {
+        const _id = req.params.saleId;
+        const deleted = await productsLogic.deleteSaleAsync(_id);
+        res.sendStatus(204);
+    }
+    catch (err) {
+        res.status(500).json(getError(err as Error));
+    }
+});
 router.get("/img/:imgName", async (req, res) => {
     try {
         const name = req.params.imgName;
