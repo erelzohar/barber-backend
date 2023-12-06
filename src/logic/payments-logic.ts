@@ -4,10 +4,8 @@ import FormData from 'form-data';
 import { config } from "../config";
 
 async function getPaymentFormAsync(data: PaymentFormRequest) {
-    const formData = new FormData();
-    console.log(data.orderJSON);
-    
-    formData.append("orderJSON", data.orderJSON);
+    const formData = new FormData();    
+    formData.append("cField1", data.orderJSON);
     formData.append("description", data.description);
     formData.append("userId", config.meshulam.UserId);
     formData.append("maxPaymentNum", data.maxPaymentNum);
