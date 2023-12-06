@@ -5,6 +5,8 @@ import PaymentFormRequest from "../models/PaymentFormRequest";
 import paymentsLogic from "../logic/payments-logic";
 import Transaction from "../models/Transaction";
 import ordersLogic from "../logic/orders-logic";
+import Order from "../models/Order";
+import mongoose from "mongoose";
 
 const router = express.Router()
 router.use(bodyParser.json());
@@ -40,9 +42,11 @@ router.post("/payment", urlencodedParser, async (req, res) => {
         transaction.transactionId = req.body['data[transactionId]'];
         transaction.processId = req.body['data[processId]'];
         transaction.processToken = req.body['data[processToken]'];
-        const order = req.body['data[customFields][cField1]'] ? JSON.parse(req.body['data[customFields][cField1]']) : null;
+        const parsedOrder = req.body['data[customFields][cField1]'] ? JSON.parse(req.body['data[customFields][cField1]']) : null;
+        const order = new Order(parsedOrder);
+        order.transactionId = new mongoose.Types.ObjectId(transaction._id);
         const addedOrder = await ordersLogic.createOrderAsync(order);
-        transaction.orderId = addedOrder._id;
+        transaction.orderId = new mongoose.Types.ObjectId(addedOrder._id);
         await transaction.save();
         res.sendStatus(200)
     }

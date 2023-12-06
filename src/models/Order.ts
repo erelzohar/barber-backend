@@ -1,7 +1,7 @@
 import mongoose, { Document, Schema } from "mongoose";
 
 export interface IOrder {
-    transactionId: string;
+    transactionId: mongoose.Types.ObjectId;
     deliveryType: string;
     city: string;
     street: string;
@@ -19,7 +19,7 @@ export interface OrderModel extends IOrder, Document<string> { }
 const OrderScheme: Schema = new Schema({
 
     transactionId: {
-        type: String
+        type: Schema.Types.ObjectId
     },
     deliveryType: {
         type: String

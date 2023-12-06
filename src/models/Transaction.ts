@@ -27,7 +27,7 @@ export interface ITransaction {
     transactionToken: string;
     processId: string;
     processToken: string;
-    orderId: string;
+    orderId: mongoose.Types.ObjectId;
 
 
 }
@@ -111,7 +111,9 @@ const TransactionScheme: Schema = new Schema({
     status: {
         type: String
     },
-
+    orderId:{
+        type:Schema.Types.ObjectId
+    }
 }, { versionKey: false, toJSON: { virtuals: true }, id: false });
 
 
