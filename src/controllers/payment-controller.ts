@@ -15,7 +15,7 @@ router.post("/payment", urlencodedParser, async (req, res) => {
     try {
         // console.log(req.body.statusCode);
         // console.log(req.body.customFields.cField1);
-        console.log(req.body);
+        console.log(req.body.data);
         const transaction = new Transaction(req.body);
        // transaction.data.orderId = req.body.data.cField1
         console.log(transaction);
