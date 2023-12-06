@@ -4,6 +4,7 @@ import bodyParser from "body-parser";
 import PaymentFormRequest from "../models/PaymentFormRequest";
 import paymentsLogic from "../logic/payments-logic";
 import Transaction from "../models/Transaction";
+import ordersLogic from "logic/orders-logic";
 
 const router = express.Router()
 router.use(bodyParser.json());
@@ -18,12 +19,13 @@ router.post("/payment", urlencodedParser, async (req, res) => {
         console.log(req.body['data[asmachta]']);
         //console.log(data['data[asmachta]']);
         console.log(req.body);
-        
+
         const transaction = new Transaction(req.body);
         if (transaction.status === '0') return res.sendStatus(200)
         const order = req.body['data[customFields][cField1]'] ? JSON.parse(req.body['data[customFields][cField1]']) : null;
-
-
+        // const addedOrder = await ordersLogic.createOrderAsync(order);
+        // transaction.orderId = addedOrder._id;
+        // await transaction.save()
         // transaction.data.orderId = req.body['data[cField1]'];
         console.log(transaction);
         console.log(order);
