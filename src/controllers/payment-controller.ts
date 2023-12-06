@@ -13,10 +13,10 @@ router.use(bodyParser.json({ type: 'application/*+json' }))
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 router.post("/payment", urlencodedParser, async (req, res) => {
     try {
-        
+
         const data = JSON.parse(req.body);
         console.log(data);
-        console.log(data['data[asmachta]']);
+        //console.log(data['data[asmachta]']);
 
         //const transaction = new Transaction(req.body);
         // transaction.data.orderId = req.body.data.cField1
