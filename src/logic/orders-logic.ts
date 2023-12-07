@@ -13,7 +13,7 @@ function createOrderHtml(order: OrderModel) {
     return `<div style="height:100%;width:100%">
     <div style="display:flex;text-align:center;align-items:center;flex-direction:column;height:100%;width:100&;">
         <h1>
-            הזמנה מס' ${order.orderNumber}
+            הזמנה מס' : ${order.orderNumber}
         </h1>
         <div style="display:flex;width:100%;flex-direction:column;height:100%;">
             <div 
@@ -23,7 +23,7 @@ function createOrderHtml(order: OrderModel) {
                 <p>כמות</p>
             </div>
 
-            ${order.products.forEach(p => `<div 
+            ${order.products.map(p => `<div 
             style="display:flex;width:100%;justify-content:space-around;align-item:center;direction:rtl;border:1px solid rgba(0, 0, 0, 0.399);background-color: rgb(226, 225, 225);margin:0 1rem 1rem 1rem">
                 <p>${p.product}</p>
                 <p> מל צבע ניחוח</p>
