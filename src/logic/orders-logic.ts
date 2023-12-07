@@ -3,7 +3,17 @@ import nodemailer from 'nodemailer';
 
 
 function createOrderHtml(order: OrderModel) {
-    return `<div style="height:100%;width:100%">
+    return `<!DOCTYPE html>
+    <html lang="en">
+    
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Don aroma store</title>
+    </head>
+    
+    <body>
+    <div style="height:100%;width:100%">
     <div style="display:flex;text-align:center;align-items:center;flex-direction:column;height:100%;width:100&;">
         <h1>
             הזמנה מס' : ${order.orderNumber}
@@ -37,7 +47,10 @@ function createOrderHtml(order: OrderModel) {
         <p>${order.deliveryType === "express" ? "משלוח אקספרס עד 3 ימי עסקים" : order.deliveryType === "regular" ? "משלוח רגיל עד 8 ימי עסקים" : "איסוף עצמי"}</p>
         <p> סה"כ : ${order.totalSum}&#8362;</p>
     </div>
-</div>`
+</div>
+</body>
+
+</html>`
 }
 function getAllOrdersAsync() {
     return Order.find().exec();
