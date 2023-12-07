@@ -25,7 +25,7 @@ function createOrderHtml(order: OrderModel) {
 
             ${order.products.forEach(p => `<div 
             style="display:flex;width:100%;justify-content:space-around;align-item:center;direction:rtl;border:1px solid rgba(0, 0, 0, 0.399);background-color: rgb(226, 225, 225);margin:0 1rem 1rem 1rem">
-                <p>${p.productId}</p>
+                <p>${p.product}</p>
                 <p> מל צבע ניחוח</p>
                 <p> ${p.qunantity}</p>
             </div>`)}
