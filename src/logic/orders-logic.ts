@@ -6,7 +6,7 @@ const transporter = nodemailer.createTransport({
     auth: {
         // TODO: replace `user` and `pass` values from <https://forwardemail.net>
         user: "donaromastore@gmail.com",
-        pass: "erel13579",
+        pass: "hmxtuensenhjvrfm",
     },
 });
 function createOrderHtml(order: OrderModel) {
