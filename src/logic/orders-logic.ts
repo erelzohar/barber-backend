@@ -1,14 +1,7 @@
 import Order, { OrderModel } from "../models/Order";
 import nodemailer from 'nodemailer';
 
-const transporter = nodemailer.createTransport({
-    service: "Gmail",
-    auth: {
-        // TODO: replace `user` and `pass` values from <https://forwardemail.net>
-        user: "donaromastore@gmail.com",
-        pass: "hmxtuensenhjvrfm",
-    },
-});
+
 function createOrderHtml(order: OrderModel) {
     return `<div style="height:100%;width:100%">
     <div style="display:flex;text-align:center;align-items:center;flex-direction:column;height:100%;width:100&;">
@@ -27,7 +20,7 @@ function createOrderHtml(order: OrderModel) {
             style="display:flex;width:100%;justify-content:space-around;align-item:center;direction:rtl;border:1px solid rgba(0, 0, 0, 0.399);background-color: rgb(226, 225, 225);margin:0 1rem 1rem 1rem">
                 <p>${p.product}</p>
                 <p> מל צבע ניחוח</p>
-                <p> ${p.qunantity}</p>
+                <p> ${p.quantity}</p>
             </div>`)}
 
         </div>
@@ -49,18 +42,24 @@ function createOrderHtml(order: OrderModel) {
 function getAllOrdersAsync() {
     return Order.find().exec();
 }
-function createOrderAsync(order: OrderModel) {
+async function createOrderAsync(order: OrderModel) {
     const errors = order.validateSync();
     if (errors) throw new Error(errors.message);
-    console.log(order);
-    
+    const transporter = nodemailer.createTransport({
+        service: "Gmail",
+        auth: {
+            // TODO: replace `user` and `pass` values from <https://forwardemail.net>
+            user: "donaromastore@gmail.com",
+            pass: "hmxtuensenhjvrfm",
+        },
+    });
     const mailOptions = {
         from: "donaromastore@gmail.com",
         to: 'trtkpp@gmail.com',
         subject: 'Don aroma store | new order !',
         html: createOrderHtml(order)
     };
-    transporter.sendMail(mailOptions);
+    await transporter.sendMail(mailOptions);
     return order.save();
 }
 

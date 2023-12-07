@@ -5,7 +5,7 @@ export interface IOrder {
     deliveryType: string;
     products: {
         product: mongoose.Types.ObjectId,
-        qunantity: number
+        quantity: number
     }[];
     city: string;
     street: string;
