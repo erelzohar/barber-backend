@@ -19,6 +19,8 @@ router.post("/payment", urlencodedParser, async (req, res) => {
     try {
         const transaction = new Transaction(req.body);
         if (transaction.status === '0') return res.sendStatus(200)
+        console.log(transaction);
+        
         transaction.asmachta = req.body['data[asmachta]'];
         transaction.cardSuffix = req.body['data[cardSuffix]'];
         transaction.cardType = req.body['data[cardType]'];
