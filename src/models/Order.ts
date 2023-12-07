@@ -3,6 +3,10 @@ import mongoose, { Document, Schema } from "mongoose";
 export interface IOrder {
     transactionId: mongoose.Types.ObjectId;
     deliveryType: string;
+    products: {
+        productId: mongoose.Types.ObjectId,
+        qunantity: number
+    }[];
     city: string;
     street: string;
     streetNum: string;
@@ -12,6 +16,7 @@ export interface IOrder {
     email: string;
     orderNumber: string;
     orderDate: string;
+    totalSum:number;
     done: boolean;
 }
 
@@ -43,6 +48,9 @@ const OrderScheme: Schema = new Schema({
     phone: {
         type: String
     },
+    totalSum: {
+        type: Number
+    },
     email: {
         type: String
     },
@@ -51,6 +59,9 @@ const OrderScheme: Schema = new Schema({
     },
     orderNumber: {
         type: String
+    },
+    products: {
+        type: Array
     },
     done: {
         type: Boolean

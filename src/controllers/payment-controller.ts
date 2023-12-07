@@ -8,12 +8,13 @@ import ordersLogic from "../logic/orders-logic";
 import Order from "../models/Order";
 import mongoose from "mongoose";
 
-const router = express.Router()
+const router = express.Router();
 router.use(bodyParser.json());
 
-router.use(bodyParser.json({ type: 'application/*+json' }))
+router.use(bodyParser.json({ type: 'application/*+json' }));
 
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
+
 router.post("/payment", urlencodedParser, async (req, res) => {
     try {
         const transaction = new Transaction(req.body);
@@ -45,6 +46,7 @@ router.post("/payment", urlencodedParser, async (req, res) => {
         const parsedOrder = req.body['data[customFields][cField1]'] ? JSON.parse(req.body['data[customFields][cField1]']) : null;
         const order = new Order(parsedOrder);
         order.transactionId = new mongoose.Types.ObjectId(transaction._id);
+        order.totalSum = +transaction.sum;
         const addedOrder = await ordersLogic.createOrderAsync(order);
         transaction.orderId = new mongoose.Types.ObjectId(addedOrder._id);
         await transaction.save();
