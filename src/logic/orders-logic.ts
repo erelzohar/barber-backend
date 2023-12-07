@@ -35,14 +35,14 @@ function createOrderHtml(order: OrderModel) {
     <div style="direction:rtl;">
         <span style="display:flex;width:100%;justify-content:space-around">
             <p style="font-weight:bold">איש קשר :</p>
-            <p> ${order.fullName}</p>
-            <p style="direction:ltr;">${order.email}</p>
-            <p style="direction:ltr;"> ${order.phone}</p>
+            <p style="margin:3px;"> ${order.fullName}</p>
+            <p style="direction:ltr;margin:3px;">${order.email}</p>
+            <p style="direction:ltr;margin:3px;"> ${order.phone}</p>
         </span>
 
         <p>${order.street + " " + order.streetNum + " " + order.city + " " + (order.aptNum ? order.aptNum : '')}</p>
         <p>${order.deliveryType === "express" ? "משלוח אקספרס עד 3 ימי עסקים" : order.deliveryType === "regular" ? "משלוח רגיל עד 8 ימי עסקים" : "איסוף עצמי"}</p>
-        <p> סה"כ : ${order.totalSum}</p>
+        <p> סה"כ : ${order.totalSum}&#8362;</p>
     </div>
 </div>`
 }
@@ -52,6 +52,8 @@ function getAllOrdersAsync() {
 function createOrderAsync(order: OrderModel) {
     const errors = order.validateSync();
     if (errors) throw new Error(errors.message);
+    console.log(order);
+    
     const mailOptions = {
         from: "donaromastore@gmail.com",
         to: 'trtkpp@gmail.com',
