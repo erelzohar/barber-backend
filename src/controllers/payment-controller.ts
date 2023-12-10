@@ -18,7 +18,8 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false });
 router.post("/payment", urlencodedParser, async (req, res) => {
     try {
         console.log("FIRST TIME");
-
+        console.log(req.originalUrl);
+        
         const transaction = new Transaction(req.body);
         if (transaction.status === '0') return res.sendStatus(200);        
         transaction.asmachta = req.body['data[asmachta]'];
