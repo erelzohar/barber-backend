@@ -18,7 +18,7 @@ function createOrderHtml(order: OrderModel) {
         <h1>
             הזמנה מס' : ${order.orderNumber}
         </h1>
-        <div style="display:flex;width:100%;flex-direction:column;height:100%;">
+        <div style="width:100%;height:100%;">
             <div 
             style="display:flex;width:100%;justify-content:space-around;align-item:center;direction:rtl;border:1px solid rgba(0, 0, 0, 0.399);background-color: rgb(200, 200, 200);margin:1rem 1rem 0 1rem;font-weight:bold">
                 <p>שם המוצר</p>
