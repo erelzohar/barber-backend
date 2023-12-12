@@ -17,14 +17,14 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 router.post("/payment", urlencodedParser, async (req, res) => {
     try {
-        console.log("FIRST TIME");
-        console.log(req.originalUrl);
-        console.log(req.body);
-        
         const transaction = new Transaction(req.body);
         if (transaction.status === '0') return res.sendStatus(200);  
+        
         const isExists = await Transaction.findOne({transactionId:req.body['data[transactionId]']});
+        console.log(isExists);
+        
         if (isExists) return res.sendStatus(200);
+
         transaction.asmachta = req.body['data[asmachta]'];
         transaction.cardSuffix = req.body['data[cardSuffix]'];
         transaction.cardType = req.body['data[cardType]'];
@@ -49,6 +49,7 @@ router.post("/payment", urlencodedParser, async (req, res) => {
         transaction.transactionId = req.body['data[transactionId]'];
         transaction.processId = req.body['data[processId]'];
         transaction.processToken = req.body['data[processToken]'];
+
         const parsedOrder = req.body['data[customFields][cField1]'] ? JSON.parse(req.body['data[customFields][cField1]']) : null;
         const order = new Order(parsedOrder);
         order.transactionId = new mongoose.Types.ObjectId(transaction._id);
