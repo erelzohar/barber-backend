@@ -1,4 +1,4 @@
-import htmlBuilder from "helpers/html-builder";
+import htmlBuilder from "../helpers/html-builder";
 import Order, { OrderModel } from "../models/Order";
 import nodemailer from 'nodemailer';
 
