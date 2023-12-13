@@ -242,7 +242,7 @@ function createOrderHtml(order: OrderModel) {
                                   <tr>
                                     <td style="padding-right: 0px;padding-left: 0px;" align="center">
                                       <a href="https://unlayer.com" target="_blank">
-                                        <img align="center" border="0" src="images/image-6.png" alt="Logo" title="Logo"
+                                        <img align="center" border="0" src="assets/images/mailimage-6.png" alt="Logo" title="Logo"
                                           style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 16%;max-width: 92.8px;"
                                           width="92.8" class="v-src-width v-src-max-width" />
                                       </a>
@@ -369,7 +369,7 @@ function createOrderHtml(order: OrderModel) {
                                   <tr>
                                     <td style="padding-right: 0px;padding-left: 0px;" align="center">
                                       <a href="https://www.donaroma-il.com" target="_blank">
-                                        <img align="center" border="0" src="images/image-5.jpeg" alt="" title=""
+                                        <img align="center" border="0" src="assets/images/mailimage-5.jpeg" alt="" title=""
                                           style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 100%;max-width: 600px;"
                                           width="600" class="v-src-width v-src-max-width" />
                                       </a>
@@ -710,7 +710,7 @@ function createOrderHtml(order: OrderModel) {
   
                                 <!--[if mso]><table width="100%"><tr><td><![endif]-->
                                 <h4
-                                  style="margin: 0px; line-height: 140%; text-align: center; word-wrap: break-word; font-family: tahoma,arial,helvetica,sans-serif; font-size: 16px; font-weight: 400;">
+                                  dir="rtl" style="margin: 0px; line-height: 140%; text-align: center; word-wrap: break-word; font-family: tahoma,arial,helvetica,sans-serif; font-size: 16px; font-weight: 400;">
                                   <strong>פרטי איש קשר:</strong>${order.fullName} &nbsp;${order.email}&nbsp;${order.phone}</h4>
                                 <!--[if mso]></td></tr></table><![endif]-->
   
@@ -731,7 +731,7 @@ function createOrderHtml(order: OrderModel) {
                                   style="font-size: 14px; color: #333333; line-height: 160%; text-align: right; word-wrap: break-word;">
                                   <p style="line-height: 160%;">
                                     <span style="font-size: 18px; line-height: 28.8px;">
-                                    ${order.street + " " + order.streetNum + " " + order.city + " " + (order.aptNum ? order.aptNum : '')}
+                                    ${order.street + " " + order.streetNum + " " + order.city + " " + (order.aptNum ? "דירה "+ order.aptNum : '')}
                                   </span>
                                   </p>
                                 </div>
@@ -880,7 +880,7 @@ function createOrderHtml(order: OrderModel) {
                                   <tr>
                                     <td style="padding-right: 0px;padding-left: 0px;" align="center">
                                       <a href="Help Line Icon" target="_blank">
-                                        <img align="center" border="0" src="images/image-4.png" alt="Icon" title="Icon"
+                                        <img align="center" border="0" src="assets/images/mailimage-4.png" alt="Icon" title="Icon"
                                           style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 15%;max-width: 87px;"
                                           width="87" class="v-src-width v-src-max-width" />
                                       </a>
@@ -903,7 +903,7 @@ function createOrderHtml(order: OrderModel) {
   
                                 <div
                                   style="font-size: 14px; color: #0e4904; line-height: 180%; text-align: center; word-wrap: break-word;">
-                                  <p style="line-height: 180%;"><span
+                                  <p dir="rtl"  style="line-height: 180%;"><span
                                       style="font-size: 18px; line-height: 32.4px;"><strong> לכל שאלה אנו זמינים עבורכם
                                         במהלך שעות הפעילות בטלפון .ובפלטפורמות השונות</strong></span></p>
                                 </div>
@@ -1013,7 +1013,7 @@ function createOrderHtml(order: OrderModel) {
                                             style="word-break: break-word;border-collapse: collapse !important;vertical-align: top">
                                             <a href="https://www.instagram.com/don_aromaisr/" title="Instagram"
                                               target="_blank">
-                                              <img src="images/image-2.png" alt="Instagram" title="Instagram" width="32"
+                                              <img src="assets/images/mailimage-2.png" alt="Instagram" title="Instagram" width="32"
                                                 style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block !important;border: none;height: auto;float: none;max-width: 32px !important">
                                             </a>
                                           </td>
@@ -1031,7 +1031,7 @@ function createOrderHtml(order: OrderModel) {
                                             style="word-break: break-word;border-collapse: collapse !important;vertical-align: top">
                                             <a href="https://www.facebook.com/profile.php?id=61550822289202&mibextid=LQQJ4d"
                                               title="Facebook" target="_blank">
-                                              <img src="images/image-1.png" alt="Facebook" title="Facebook" width="32"
+                                              <img src="assets/images/mailimage-1.png" alt="Facebook" title="Facebook" width="32"
                                                 style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block !important;border: none;height: auto;float: none;max-width: 32px !important">
                                             </a>
                                           </td>
@@ -1048,7 +1048,7 @@ function createOrderHtml(order: OrderModel) {
                                           <td align="left" valign="middle"
                                             style="word-break: break-word;border-collapse: collapse !important;vertical-align: top">
                                             <a href="https://wa.me/972503713852" title="WhatsApp" target="_blank">
-                                              <img src="images/image-3.png" alt="WhatsApp" title="WhatsApp" width="32"
+                                              <img src="assets/images/mailimage-3.png" alt="WhatsApp" title="WhatsApp" width="32"
                                                 style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block !important;border: none;height: auto;float: none;max-width: 32px !important">
                                             </a>
                                           </td>
