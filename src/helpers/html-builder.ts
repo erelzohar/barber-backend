@@ -589,7 +589,7 @@ function createOrderHtml(order: OrderModel) {
                                 style="font-size: 14px; color: #333333; line-height: 140%; text-align: center; word-wrap: break-word;">
                                 <p dir="rtl" style="font-size: 14px; line-height: 140%;"><span
                                     style="font-family: arial, helvetica, sans-serif; font-size: 14px; line-height: 19.6px;"><span
-                                      style="font-size: 18px; line-height: 25.2px;">${(i as SoldItem).product.name + " - "+ ((i as SoldItem).color ? (i as SoldItem).color + " - " : (i as SoldItem).ml ? (i as SoldItem).ml + "ml - ":"") + (i as SoldItem).scent ? (i as SoldItem).scent : "" + " X"+(i as SoldItem).quantity}</span></span></p>
+                                      style="font-size: 18px; line-height: 25.2px;">${i.product.name + " - "+ i.color ? i.color + " - " : i.ml ? i.ml + "ml - ":"" + i.scent ? i.scent : "" + " X"+i.quantity}</span></span></p>
                               </div>
   
                             </td>
