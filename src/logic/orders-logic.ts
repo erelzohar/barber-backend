@@ -53,9 +53,9 @@ async function createOrderAsync(order: OrderModel) {
     };
     await transporter.sendMail(mailOptions);
     
-    order.items.forEach(async i=>{
-        await Product.findByIdAndUpdate(new mongoose.Types.ObjectId(i.product._id),{stock:(i.product.stock-i.quantity)});
-    });
+    // order.items.forEach(async i=>{
+    //     await Product.findByIdAndUpdate(new mongoose.Types.ObjectId(i.product._id),{stock:(i.product.stock-i.quantity)});
+    // });
     return order.save();
 }
 
