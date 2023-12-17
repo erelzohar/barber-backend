@@ -4,6 +4,8 @@ import fs from "fs";
 import { SoldItem } from "../models/SoldItem";
 
 function createOrderHtml(order: OrderModel) {
+  console.log(order);
+  
     // let imagePath = path.join(__dirname, "..", "assets", "images", "mailimage-1.png");
     // let imageBuffer = fs.readFileSync(imagePath,{encoding:'base64'});
     // const encodedImage1 = imageBuffer
