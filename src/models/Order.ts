@@ -1,12 +1,10 @@
 import mongoose, { Document, Schema } from "mongoose";
+import { SoldItem } from "./SoldItem";
 
 export interface IOrder {
     transactionId: mongoose.Types.ObjectId;
     deliveryType: string;
-    products: {
-        product: mongoose.Types.ObjectId,
-        quantity: number
-    }[];
+    products:SoldItem[];
     city: string;
     street: string;
     streetNum: string;

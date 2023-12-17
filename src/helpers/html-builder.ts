@@ -1,6 +1,7 @@
 import path from "path";
 import { OrderModel } from "../models/Order";
 import fs from "fs";
+import { SoldItem } from "../models/SoldItem";
 
 function createOrderHtml(order: OrderModel) {
     // let imagePath = path.join(__dirname, "..", "assets", "images", "mailimage-1.png");
@@ -532,27 +533,6 @@ function createOrderHtml(order: OrderModel) {
                             </tr>
                           </tbody>
                         </table>
-                        ${order.products.map(p => `<table style="font-family:arial,helvetica,sans-serif;"
-                          role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
-                          <tbody>
-                            <tr>
-                              <td class="v-container-padding-padding"
-                                style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;"
-                                align="left">
-  
-                                <div
-                                  style="font-size: 14px; color: #333333; line-height: 140%; text-align: center; word-wrap: break-word;">
-                                  <p style="font-size: 14px; line-height: 140%;"><span
-                                      style="font-family: terminal, monaco; font-size: 14px; line-height: 19.6px;"><strong><span
-                                          style="font-size: 22px; line-height: 30.8px;">${p.quantity}</span></strong></span>
-                                  </p>
-                                </div>
-  
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>`)}
-  
   
                         <!--[if (!mso)&(!IE)]><!-->
                       </div><!--<![endif]-->
@@ -580,7 +560,7 @@ function createOrderHtml(order: OrderModel) {
                                 <div
                                   style="font-size: 14px; color: #333333; line-height: 140%; text-align: center; word-wrap: break-word;">
                                   <p style="line-height: 140%;"><span
-                                      style="font-size: 24px; line-height: 33.6px;">מוצר</span></p>
+                                      style="font-size: 24px; line-height: 33.6px;">פירוט הזמנה</span></p>
                                 </div>
   
                               </td>
@@ -622,9 +602,9 @@ function createOrderHtml(order: OrderModel) {
   
                               <div
                                 style="font-size: 14px; color: #333333; line-height: 140%; text-align: center; word-wrap: break-word;">
-                                <p style="font-size: 14px; line-height: 140%;"><span
+                                <p dir="rtl" style="font-size: 14px; line-height: 140%;"><span
                                     style="font-family: arial, helvetica, sans-serif; font-size: 14px; line-height: 19.6px;"><span
-                                      style="font-size: 18px; line-height: 25.2px;">${p.product}-צבע</span></span></p>
+                                      style="font-size: 18px; line-height: 25.2px;">${(p as SoldItem).product.name + " - "+ ((p as SoldItem).color ? (p as SoldItem).color + " - " : (p as SoldItem).ml ? (p as SoldItem).ml + "ml - ":"") + (p as SoldItem).scent ? (p as SoldItem).scent : "" + " X"+(p as SoldItem).quantity}</span></span></p>
                               </div>
   
                             </td>
@@ -1160,6 +1140,7 @@ function createOrderHtml(order: OrderModel) {
   </body>
   
   </html>`
+  
 }
 
 export default {
