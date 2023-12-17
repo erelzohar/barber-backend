@@ -1,35 +1,10 @@
-import path from "path";
 import { OrderModel } from "../models/Order";
-import fs from "fs";
-import { SoldItem } from "../models/SoldItem";
 
 function createOrderHtml(order: OrderModel) {
-  console.log(order);
-    console.log(order.items[0]);
-    
-    // let imagePath = path.join(__dirname, "..", "assets", "images", "mailimage-1.png");
-    // let imageBuffer = fs.readFileSync(imagePath,{encoding:'base64'});
-    // const encodedImage1 = imageBuffer
-    // imagePath = path.join(__dirname, "..", "assets", "images", "mailimage-2.png");
-    // imageBuffer = fs.readFileSync(imagePath,{encoding:'base64'});
-    // const encodedImage2 = imageBuffer
-    // imagePath = path.join(__dirname, "..", "assets", "images", "mailimage-3.png");
-    // imageBuffer = fs.readFileSync(imagePath,{encoding:'base64'});
-    // const encodedImage3 = imageBuffer
-    // imagePath = path.join(__dirname, "..", "assets", "images", "mailimage-4.png");
-    // imageBuffer = fs.readFileSync(imagePath,{encoding:'base64'});
-    // const encodedImage4 = imageBuffer
-    // imagePath = path.join(__dirname, "..", "assets", "images", "mailimage-5.jpeg");
-    // imageBuffer = fs.readFileSync(imagePath,{encoding:'base64'});
-    // const encodedImage5 = imageBuffer
-    // imagePath = path.join(__dirname, "..", "assets", "images", "mailimage-6.png");
-    // imageBuffer = fs.readFileSync(imagePath,{encoding:'base64'});
-    // const encodedImage6 = imageBuffer
     return `<!DOCTYPE HTML
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
   <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml"
     xmlns:o="urn:schemas-microsoft-com:office:office">
-  
   <head>
     <!--[if gte mso 9]>
   <xml>
@@ -360,66 +335,6 @@ function createOrderHtml(order: OrderModel) {
               </div>
             </div>
   
-  
-  
-  
-  
-            <div class="u-row-container" style="padding: 0px;background-color: transparent">
-              <div class="u-row"
-                style="margin: 0 auto;min-width: 320px;max-width: 600px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: transparent;">
-                <div
-                  style="border-collapse: collapse;display: table;width: 100%;height: 100%;background-color: transparent;">
-                  <!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-color: transparent;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:600px;"><tr style="background-color: transparent;"><![endif]-->
-  
-                  <!--[if (mso)|(IE)]><td align="center" width="600" style="width: 600px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;border-radius: 0px;-webkit-border-radius: 0px; -moz-border-radius: 0px;" valign="top"><![endif]-->
-                  <div id='5try' class="u-col u-col-100"
-                    style="max-width: 320px;min-width: 600px;display: table-cell;vertical-align: top;">
-                    <div
-                      style="height: 100%;width: 100% !important;border-radius: 0px;-webkit-border-radius: 0px; -moz-border-radius: 0px;">
-                      <!--[if (!mso)&(!IE)]><!-->
-                      <div
-                        style="box-sizing: border-box; height: 100%; padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;border-radius: 0px;-webkit-border-radius: 0px; -moz-border-radius: 0px;">
-                        <!--<![endif]-->
-  
-                        <table style="font-family:arial,helvetica,sans-serif;" role="presentation" cellpadding="0"
-                          cellspacing="0" width="100%" border="0">
-                          <tbody>
-                            <tr>
-                              <td class="v-container-padding-padding"
-                                style="overflow-wrap:break-word;word-break:break-word;padding:0px;font-family:arial,helvetica,sans-serif;"
-                                align="left">
-  
-                                <table width="100%" cellpadding="0" cellspacing="0" border="0">
-                                  <tr>
-                                    <td style="padding-right: 0px;padding-left: 0px;" align="center">
-                                      <a href="https://www.donaroma-il.com" target="_blank">
-                                        <img align="center" border="0" src="cid:cover" alt="" title=""
-                                          style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 100%;max-width: 600px;"
-                                          width="600" class="v-src-width v-src-max-width" />
-                                      </a>
-                                    </td>
-                                  </tr>
-                                </table>
-  
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-  
-                        <!--[if (!mso)&(!IE)]><!-->
-                      </div><!--<![endif]-->
-                    </div>
-                  </div>
-                  <!--[if (mso)|(IE)]></td><![endif]-->
-                  <!--[if (mso)|(IE)]></tr></table></td></tr></table><![endif]-->
-                </div>
-              </div>
-            </div>
-  
-  
-  
-  
-  
             <div class="u-row-container" style="padding: 0px;background-color: transparent">
               <div class="u-row"
                 style="margin: 0 auto;min-width: 320px;max-width: 600px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #dde5e7;">
@@ -533,7 +448,6 @@ function createOrderHtml(order: OrderModel) {
                                     </tr>
                                   </tbody>
                                 </table>
-  
                               </td>
                             </tr>
                           </tbody>
@@ -545,20 +459,16 @@ function createOrderHtml(order: OrderModel) {
                             <td class="v-container-padding-padding"
                               style="overflow-wrap:break-word;word-break:break-word;padding:10px 30px 50px 10px;font-family:arial,helvetica,sans-serif;"
                               align="left">
-  
                               <div
                                 style="font-size: 14px; color: #333333; line-height: 140%; text-align: center; word-wrap: break-word;">
                                 <p dir="rtl" style="font-size: 14px; line-height: 140%;"><span
                                     style="font-family: arial, helvetica, sans-serif; font-size: 14px; line-height: 19.6px;"><span
                                       style="font-size: 18px; line-height: 25.2px;">${i.product.name + " - "+ (i.color ? i.color + " - " : i.ml ? i.ml + "ml - ":"") + (i.scent ? i.scent : "") + " X"+i.quantity.toString()}</span></span></p>
                               </div>
-  
                             </td>
                           </tr>
                         </tbody>
                       </table>`)}
-                        
-  
                         <!--[if (!mso)&(!IE)]><!-->
                       </div><!--<![endif]-->
                     </div>
@@ -568,11 +478,6 @@ function createOrderHtml(order: OrderModel) {
                 </div>
               </div>
             </div>
-  
-  
-  
-  
-  
             <div class="u-row-container" style="padding: 0px;background-color: transparent">
               <div class="u-row"
                 style="margin: 0 auto;min-width: 320px;max-width: 600px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #dde5e7;">

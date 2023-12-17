@@ -20,9 +20,7 @@ router.post("/payment", urlencodedParser, async (req, res) => {
         const transaction = new Transaction(req.body);
         if (transaction.status === '0') return res.sendStatus(200);  
         
-        const isExists = await Transaction.findOne({transactionId:req.body['data[transactionId]']});
-        console.log(isExists);
-        
+        const isExists = await Transaction.findOne({transactionId:req.body['data[transactionId]']});        
         if (isExists) return res.sendStatus(200);
 
         transaction.asmachta = req.body['data[asmachta]'];
@@ -49,8 +47,7 @@ router.post("/payment", urlencodedParser, async (req, res) => {
         transaction.transactionId = req.body['data[transactionId]'];
         transaction.processId = req.body['data[processId]'];
         transaction.processToken = req.body['data[processToken]'];
-        console.log(req.body['data[customFields][cField1]'] );
-        
+
         const parsedOrder = req.body['data[customFields][cField1]'] ? JSON.parse(req.body['data[customFields][cField1]']) : null;
         const order = new Order(parsedOrder);
         order.transactionId = new mongoose.Types.ObjectId(transaction._id);
@@ -69,9 +66,7 @@ router.post("/payment", urlencodedParser, async (req, res) => {
 router.post("/get-payment-form", async (req, res) => {
     try {
         const formRequest = new PaymentFormRequest(req.body);
-        const response = await paymentsLogic.getPaymentFormAsync(formRequest);
-        console.log(response);
-        
+        const response = await paymentsLogic.getPaymentFormAsync(formRequest);        
         res.send(response);
     }
     catch (err) {

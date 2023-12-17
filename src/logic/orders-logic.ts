@@ -2,6 +2,8 @@ import path from "path";
 import htmlBuilder from "../helpers/html-builder";
 import Order, { OrderModel } from "../models/Order";
 import nodemailer from 'nodemailer';
+import Product from "../models/Product";
+import mongoose from "mongoose";
 
 function getAllOrdersAsync() {
     return Order.find().exec();
@@ -28,11 +30,6 @@ async function createOrderAsync(order: OrderModel) {
             cid: 'logo' 
         },
         {
-            filename: 'mailimage-5.jpeg',
-            path: path.join(__dirname, "..", "assets", "images", "mailimage-5.jpeg"),
-            cid: 'cover' 
-        },
-        {
             filename: 'mailimage-4.png',
             path: path.join(__dirname, "..", "assets", "images", "mailimage-4.png"),
             cid: 'image4' 
@@ -55,6 +52,9 @@ async function createOrderAsync(order: OrderModel) {
         html: htmlBuilder.createOrderHtml(order)
     };
     await transporter.sendMail(mailOptions);
+    order.items.forEach(async i=>{
+        await Product.findByIdAndUpdate(new mongoose.Types.ObjectId(i.product._id),{stock:(i.product.stock-i.quantity)});
+    });
     return order.save();
 }
 
