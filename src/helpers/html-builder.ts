@@ -490,24 +490,6 @@ function createOrderHtml(order: OrderModel) {
                         style="box-sizing: border-box; height: 100%; padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;border-radius: 0px;-webkit-border-radius: 0px; -moz-border-radius: 0px;">
                         <!--<![endif]-->
   
-                        <table style="font-family:arial,helvetica,sans-serif;" role="presentation" cellpadding="0"
-                          cellspacing="0" width="100%" border="0">
-                          <tbody>
-                            <tr>
-                              <td class="v-container-padding-padding"
-                                style="overflow-wrap:break-word;word-break:break-word;padding:50px 10px 1px;font-family:arial,helvetica,sans-serif;"
-                                align="left">
-  
-                                <div
-                                  style="font-size: 14px; color: #333333; line-height: 140%; text-align: center; word-wrap: break-word;">
-                                  <p style="line-height: 140%;"><span
-                                      style="font-size: 24px; line-height: 33.6px;">כמות</span></p>
-                                </div>
-  
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
   
                         <table style="font-family:arial,helvetica,sans-serif;" role="presentation" cellpadding="0"
                           cellspacing="0" width="100%" border="0">
@@ -592,7 +574,7 @@ function createOrderHtml(order: OrderModel) {
                             </tr>
                           </tbody>
                         </table>
-                        ${order.products.map(p => `<table style="font-family:arial,helvetica,sans-serif;" role="presentation" cellpadding="0"
+                        ${order.items.map(i => `<table style="font-family:arial,helvetica,sans-serif;" role="presentation" cellpadding="0"
                         cellspacing="0" width="100%" border="0">
                         <tbody>
                           <tr>
@@ -604,7 +586,7 @@ function createOrderHtml(order: OrderModel) {
                                 style="font-size: 14px; color: #333333; line-height: 140%; text-align: center; word-wrap: break-word;">
                                 <p dir="rtl" style="font-size: 14px; line-height: 140%;"><span
                                     style="font-family: arial, helvetica, sans-serif; font-size: 14px; line-height: 19.6px;"><span
-                                      style="font-size: 18px; line-height: 25.2px;">${(p as SoldItem).product.name + " - "+ ((p as SoldItem).color ? (p as SoldItem).color + " - " : (p as SoldItem).ml ? (p as SoldItem).ml + "ml - ":"") + (p as SoldItem).scent ? (p as SoldItem).scent : "" + " X"+(p as SoldItem).quantity}</span></span></p>
+                                      style="font-size: 18px; line-height: 25.2px;">${(i as SoldItem).product.name + " - "+ ((i as SoldItem).color ? (i as SoldItem).color + " - " : (i as SoldItem).ml ? (i as SoldItem).ml + "ml - ":"") + (i as SoldItem).scent ? (i as SoldItem).scent : "" + " X"+(i as SoldItem).quantity}</span></span></p>
                               </div>
   
                             </td>

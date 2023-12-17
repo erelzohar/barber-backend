@@ -4,7 +4,7 @@ import { SoldItem } from "./SoldItem";
 export interface IOrder {
     transactionId: mongoose.Types.ObjectId;
     deliveryType: string;
-    products:SoldItem[];
+    items:SoldItem[];
     city: string;
     street: string;
     streetNum: string;
