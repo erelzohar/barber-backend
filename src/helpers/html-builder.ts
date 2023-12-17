@@ -3,24 +3,24 @@ import { OrderModel } from "../models/Order";
 import fs from "fs";
 
 function createOrderHtml(order: OrderModel) {
-    let imagePath = path.join(__dirname, "..", "assets", "images", "mailimage-1.png");
-    let imageBuffer = fs.readFileSync(imagePath,{encoding:'base64'});
-    const encodedImage1 = imageBuffer
-    imagePath = path.join(__dirname, "..", "assets", "images", "mailimage-2.png");
-    imageBuffer = fs.readFileSync(imagePath,{encoding:'base64'});
-    const encodedImage2 = imageBuffer
-    imagePath = path.join(__dirname, "..", "assets", "images", "mailimage-3.png");
-    imageBuffer = fs.readFileSync(imagePath,{encoding:'base64'});
-    const encodedImage3 = imageBuffer
-    imagePath = path.join(__dirname, "..", "assets", "images", "mailimage-4.png");
-    imageBuffer = fs.readFileSync(imagePath,{encoding:'base64'});
-    const encodedImage4 = imageBuffer
-    imagePath = path.join(__dirname, "..", "assets", "images", "mailimage-5.jpeg");
-    imageBuffer = fs.readFileSync(imagePath,{encoding:'base64'});
-    const encodedImage5 = imageBuffer
-    imagePath = path.join(__dirname, "..", "assets", "images", "mailimage-6.png");
-    imageBuffer = fs.readFileSync(imagePath,{encoding:'base64'});
-    const encodedImage6 = imageBuffer
+    // let imagePath = path.join(__dirname, "..", "assets", "images", "mailimage-1.png");
+    // let imageBuffer = fs.readFileSync(imagePath,{encoding:'base64'});
+    // const encodedImage1 = imageBuffer
+    // imagePath = path.join(__dirname, "..", "assets", "images", "mailimage-2.png");
+    // imageBuffer = fs.readFileSync(imagePath,{encoding:'base64'});
+    // const encodedImage2 = imageBuffer
+    // imagePath = path.join(__dirname, "..", "assets", "images", "mailimage-3.png");
+    // imageBuffer = fs.readFileSync(imagePath,{encoding:'base64'});
+    // const encodedImage3 = imageBuffer
+    // imagePath = path.join(__dirname, "..", "assets", "images", "mailimage-4.png");
+    // imageBuffer = fs.readFileSync(imagePath,{encoding:'base64'});
+    // const encodedImage4 = imageBuffer
+    // imagePath = path.join(__dirname, "..", "assets", "images", "mailimage-5.jpeg");
+    // imageBuffer = fs.readFileSync(imagePath,{encoding:'base64'});
+    // const encodedImage5 = imageBuffer
+    // imagePath = path.join(__dirname, "..", "assets", "images", "mailimage-6.png");
+    // imageBuffer = fs.readFileSync(imagePath,{encoding:'base64'});
+    // const encodedImage6 = imageBuffer
     return `<!DOCTYPE HTML
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
   <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml"
@@ -261,8 +261,8 @@ function createOrderHtml(order: OrderModel) {
                                 <table width="100%" cellpadding="0" cellspacing="0" border="0">
                                   <tr>
                                     <td style="padding-right: 0px;padding-left: 0px;" align="center">
-                                      <a href="https://unlayer.com" target="_blank">
-                                        <img align="center" border="0" src="data:image/png;base64,${encodedImage6}" alt="Logo" title="Logo"
+                                      <a href="https://donaroma-il.com" target="_blank">
+                                        <img align="center" border="0" src="cid:logo" alt="Logo" title="Logo"
                                           style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 16%;max-width: 92.8px;"
                                           width="92.8" class="v-src-width v-src-max-width" />
                                       </a>
@@ -389,7 +389,7 @@ function createOrderHtml(order: OrderModel) {
                                   <tr>
                                     <td style="padding-right: 0px;padding-left: 0px;" align="center">
                                       <a href="https://www.donaroma-il.com" target="_blank">
-                                        <img align="center" border="0" src="data:image/jpeg;base64,${encodedImage5}" alt="" title=""
+                                        <img align="center" border="0" src="cid:cover" alt="" title=""
                                           style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 100%;max-width: 600px;"
                                           width="600" class="v-src-width v-src-max-width" />
                                       </a>
@@ -900,7 +900,7 @@ function createOrderHtml(order: OrderModel) {
                                   <tr>
                                     <td style="padding-right: 0px;padding-left: 0px;" align="center">
                                       <a href="Help Line Icon" target="_blank">
-                                        <img align="center" border="0" src="data:image/png;base64,${encodedImage4}" alt="Icon" title="Icon"
+                                        <img align="center" border="0" src="cid:image4" alt="Icon" title="Icon"
                                           style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 15%;max-width: 87px;"
                                           width="87" class="v-src-width v-src-max-width" />
                                       </a>
@@ -1033,7 +1033,7 @@ function createOrderHtml(order: OrderModel) {
                                             style="word-break: break-word;border-collapse: collapse !important;vertical-align: top">
                                             <a href="https://www.instagram.com/don_aromaisr/" title="Instagram"
                                               target="_blank">
-                                              <img src="data:image/png;base64,${encodedImage2}" alt="Instagram" title="Instagram" width="32"
+                                              <img src="cid:image2" alt="Instagram" title="Instagram" width="32"
                                                 style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block !important;border: none;height: auto;float: none;max-width: 32px !important">
                                             </a>
                                           </td>
@@ -1051,7 +1051,7 @@ function createOrderHtml(order: OrderModel) {
                                             style="word-break: break-word;border-collapse: collapse !important;vertical-align: top">
                                             <a href="https://www.facebook.com/profile.php?id=61550822289202&mibextid=LQQJ4d"
                                               title="Facebook" target="_blank">
-                                              <img src="data:image/png;base64,${encodedImage1}" alt="Facebook" title="Facebook" width="32"
+                                              <img src="cid:image1" alt="Facebook" title="Facebook" width="32"
                                                 style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block !important;border: none;height: auto;float: none;max-width: 32px !important">
                                             </a>
                                           </td>
@@ -1068,7 +1068,7 @@ function createOrderHtml(order: OrderModel) {
                                           <td align="left" valign="middle"
                                             style="word-break: break-word;border-collapse: collapse !important;vertical-align: top">
                                             <a href="https://wa.me/972503713852" title="WhatsApp" target="_blank">
-                                              <img src="data:image/png;base64,${encodedImage3}" alt="WhatsApp" title="WhatsApp" width="32"
+                                              <img src="cid:image3" alt="WhatsApp" title="WhatsApp" width="32"
                                                 style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: block !important;border: none;height: auto;float: none;max-width: 32px !important">
                                             </a>
                                           </td>
