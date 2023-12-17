@@ -58,7 +58,7 @@ const OrderScheme: Schema = new Schema({
     orderNumber: {
         type: String
     },
-    products: {
+    items: {
         type: Array
     },
     done: {
