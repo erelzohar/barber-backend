@@ -50,6 +50,7 @@ router.post("/payment", urlencodedParser, async (req, res) => {
 
         const parsedOrder = req.body['data[customFields][cField1]'] ? JSON.parse(req.body['data[customFields][cField1]']) : null;
         const order = new Order(parsedOrder);
+        
         order.transactionId = new mongoose.Types.ObjectId(transaction._id);
         order.totalSum = +transaction.sum;
         const addedOrder = await ordersLogic.createOrderAsync(order);

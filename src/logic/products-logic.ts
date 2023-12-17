@@ -104,6 +104,8 @@ async function updateProductAsync(product: ProductModel, images: UploadedFile[],
         });
     }
     if (!product.images || product.images?.length === 0) product.images = ["logo-donaroma.webp"];
+    product.name = product.name.replace('"',"").replace("'","");
+    product.description = product.description.replace('"',"").replace("'","");
     return Product.findByIdAndUpdate(new mongoose.Types.ObjectId(product._id), { ...product }, { new: true, runValidators: true }).populate("category").populate("scentCategory").populate('sales').exec();
 
 }

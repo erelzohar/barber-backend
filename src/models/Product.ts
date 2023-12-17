@@ -94,5 +94,10 @@ ProductSchema.virtual("mlPrices").get(function () {
     }
 })
 
+ProductSchema.pre('save',function(next){
+    this.name = this.name.replace('"',"").replace("'","");//fix later json problems    
+    this.description = this.description.replace('"',"").replace("'","");   
+    next();
+})
 
 export default mongoose.model<ProductModel>("Product", ProductSchema, "products");

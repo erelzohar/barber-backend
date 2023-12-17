@@ -59,8 +59,6 @@ router.get("/categories-ex", async (req, res) => {
 
 router.post("/", verifyAdmin, async (req, res) => {
     try {
-        console.log(req.body);
-        
         if (req.body.scents) req.body.scents = JSON.parse(req.body.scents);
         if (req.body.colors) req.body.colors = JSON.parse(req.body.colors);
         if (req.body.images) req.body.images = JSON.parse(req.body.images);
