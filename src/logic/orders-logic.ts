@@ -52,6 +52,8 @@ async function createOrderAsync(order: OrderModel) {
         html: htmlBuilder.createOrderHtml(order)
     };
     await transporter.sendMail(mailOptions);
+    console.log(order.items);
+    
     order.items.forEach(async i=>{
         await Product.findByIdAndUpdate(new mongoose.Types.ObjectId(i.product._id),{stock:(i.product.stock-i.quantity)});
     });
