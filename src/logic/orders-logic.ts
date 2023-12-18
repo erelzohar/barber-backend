@@ -27,35 +27,37 @@ async function createOrderAsync(order: OrderModel) {
         attachments: [{
             filename: 'mailimage-6.png',
             path: path.join(__dirname, "..", "assets", "images", "mailimage-6.png"),
-            cid: 'logo' 
+            cid: 'logo'
         },
         {
             filename: 'mailimage-4.png',
             path: path.join(__dirname, "..", "assets", "images", "mailimage-4.png"),
-            cid: 'image4' 
+            cid: 'image4'
         },
         {
             filename: 'mailimage-3.png',
             path: path.join(__dirname, "..", "assets", "images", "mailimage-3.png"),
-            cid: 'image3' 
+            cid: 'image3'
         },
         {
             filename: 'mailimage-2.png',
             path: path.join(__dirname, "..", "assets", "images", "mailimage-2.png"),
-            cid: 'image2' 
+            cid: 'image2'
         },
         {
             filename: 'mailimage-1.png',
             path: path.join(__dirname, "..", "assets", "images", "mailimage-1.png"),
-            cid: 'image1' 
+            cid: 'image1'
         },],
         html: htmlBuilder.createOrderHtml(order)
     };
     await transporter.sendMail(mailOptions);
-    
-    // order.items.forEach(async i=>{
-    //     await Product.findByIdAndUpdate(new mongoose.Types.ObjectId(i.product._id),{stock:(i.product.stock-i.quantity)});
-    // });
+
+    order.items.forEach(async i => {
+        const updatedProduct = await Product.findById(i.product._id);
+        updatedProduct.stock = updatedProduct.stock - i.quantity;
+        await Product.findByIdAndUpdate(new mongoose.Types.ObjectId(i.product._id), { stock: updatedProduct.stock });
+    });
     return order.save();
 }
 
