@@ -46,7 +46,8 @@ async function approveTransaction(transaction: TransactionModel, pageCode: strin
 
 async function getPaymentFormAsync(data: PaymentFormRequest) {
     const formData = new FormData();
-    console.log("cfield start");
+    formData.append("check", '45454');
+    console.log(data);
     formData.append("cField1", data.orderJSON);
     formData.append("cField2", config.meshulam.pageCodes[(data.pageCode as "bit" || "applePay" || "googlePay" || "credit")]);
     formData.append("description", data.description);
