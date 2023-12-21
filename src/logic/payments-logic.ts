@@ -32,6 +32,7 @@ async function approveTransaction(transaction: TransactionModel, pageCode: strin
     formData.append("transactionId", transaction.transactionId);
     formData.append("processId", transaction.processId);
     formData.append("processToken", transaction.processToken);
+    formData.append("transactionToken", transaction.transactionToken);
 
     const res = await axios({
         method: "post",
