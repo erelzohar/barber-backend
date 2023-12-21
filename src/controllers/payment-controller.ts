@@ -18,7 +18,7 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false });
 router.post("/payment", urlencodedParser, async (req, res) => {
     try {
         const transaction = new Transaction(req.body);
-        if (transaction.status === '0') return res.sendStatus(200);
+        if (transaction.status === 0) return res.sendStatus(200);
 
         // const isExists = await Transaction.findOne({ transactionId: req.body['data[transactionId]'] });
         // if (isExists) return res.sendStatus(200);
@@ -55,10 +55,13 @@ router.post("/payment", urlencodedParser, async (req, res) => {
         order.transactionId = new mongoose.Types.ObjectId(transaction._id);
         order.totalSum = +transaction.sum;
         const addedOrder = await ordersLogic.createOrderAsync(order);
+
         transaction.orderId = new mongoose.Types.ObjectId(addedOrder._id);
         await transaction.save();
+
         const pageCode = req.body['data[customFields][cField2]'];
         await paymentsLogic.approveTransaction(transaction,pageCode);
+        
         return res.sendStatus(200);
     }
     catch (err) {
@@ -73,6 +76,7 @@ router.post("/get-payment-form", async (req, res) => {
         res.send(response);
     }
     catch (err) {
+        console.log(err);
         res.status(500).json(getError(err as Error));
     }
 });

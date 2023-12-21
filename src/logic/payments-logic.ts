@@ -40,8 +40,6 @@ async function approveTransaction(transaction: TransactionModel, pageCode: strin
         data: formData
     })
 
-    console.log(res.data);
-
     return res.data;
 }
 

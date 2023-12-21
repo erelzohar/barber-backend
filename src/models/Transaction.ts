@@ -2,7 +2,7 @@ import mongoose, { Document, Schema } from "mongoose";
 
 export interface ITransaction {
     err: any;
-    status: string;
+    status: number;
     asmachta: string;
     cardSuffix: string;
     cardType: string;
