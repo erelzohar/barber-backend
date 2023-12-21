@@ -22,7 +22,6 @@ router.post("/payment", urlencodedParser, async (req, res) => {
 
         const isExists = await Transaction.findOne({ transactionId: req.body['data[transactionId]'] });
         if (isExists) return res.sendStatus(200);
-        console.log(req.get('origin'));
 
         transaction.asmachta = req.body['data[asmachta]'];
         transaction.cardSuffix = req.body['data[cardSuffix]'];
@@ -67,7 +66,6 @@ router.post("/payment", urlencodedParser, async (req, res) => {
 });
 router.post("/get-payment-form", async (req, res) => {
     try {
-        console.log(req.get('origin'));
         const formRequest = new PaymentFormRequest(req.body);
         const response = await paymentsLogic.getPaymentFormAsync(formRequest);
         res.send(response);

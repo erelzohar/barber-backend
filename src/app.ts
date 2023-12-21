@@ -12,8 +12,7 @@ const app = express();
 
 app.use(express.json());
 app.use(expressFileUpload());
-//app.use(cors({ origin: (process.env.NODE_ENV !== "production" ? "*" : ["https://www.donaroma-il.com","http://localhost:3000"]) }));
-app.use(cors({ origin: "*"}));
+app.use(cors({ origin: (process.env.NODE_ENV !== "production" ? "*" : ["https://www.donaroma-il.com","https://meshulam.co.il"]) }));
 
 app.use("/", expressRateLimit({
     windowMs: 5000,
