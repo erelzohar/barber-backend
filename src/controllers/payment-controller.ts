@@ -72,7 +72,6 @@ router.post("/payment", urlencodedParser, async (req, res) => {
 router.post("/get-payment-form", async (req, res) => {
     try {
         const formRequest = new PaymentFormRequest(req.body);
-        console.log("form",formRequest);
         const response = await paymentsLogic.getPaymentFormAsync(formRequest);
         res.send(response);
     }
