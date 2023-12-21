@@ -46,6 +46,7 @@ async function approveTransaction(transaction: TransactionModel, pageCode: strin
 
 async function getPaymentFormAsync(data: PaymentFormRequest) {
     const formData = new FormData();
+    console.log("cfield start");
     formData.append("cField1", data.orderJSON);
     formData.append("cField2", config.meshulam.pageCodes[(data.pageCode as "bit" || "applePay" || "googlePay" || "credit")]);
     formData.append("description", data.description);
@@ -53,11 +54,14 @@ async function getPaymentFormAsync(data: PaymentFormRequest) {
     formData.append("maxPaymentNum", data.maxPaymentNum);
     formData.append("cancelUrl", data.cancelUrl);
     formData.append("successUrl", data.successUrl);
+    console.log("pageCode start");
     formData.append("pageCode", config.meshulam.pageCodes[(data.pageCode as "bit" || "applePay" || "googlePay" || "credit")]);
     formData.append("pageField[fullName]", data.fullName);
     formData.append("pageField[phone]", data.phone);
     formData.append("pageField[email]", data.email);
     formData.append("sum", data.sum);
+
+    console.log("formData",formData)
 
     const res = await axios({
         method: "post",

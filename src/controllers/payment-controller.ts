@@ -65,18 +65,19 @@ router.post("/payment", urlencodedParser, async (req, res) => {
         return res.sendStatus(200);
     }
     catch (err) {
-        console.log(err);
+        console.error(err);
         res.status(200).json(getError(err as Error));
     }
 });
 router.post("/get-payment-form", async (req, res) => {
     try {
         const formRequest = new PaymentFormRequest(req.body);
+        console.log("form",formRequest);
         const response = await paymentsLogic.getPaymentFormAsync(formRequest);
         res.send(response);
     }
     catch (err) {
-        console.log(err);
+        console.error(err);
         res.status(500).json(getError(err as Error));
     }
 });
