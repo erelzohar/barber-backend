@@ -20,8 +20,8 @@ router.post("/payment", urlencodedParser, async (req, res) => {
         const transaction = new Transaction(req.body);
         if (transaction.status === '0') return res.sendStatus(200);
 
-        const isExists = await Transaction.findOne({ transactionId: req.body['data[transactionId]'] });
-        if (isExists) return res.sendStatus(200);
+        // const isExists = await Transaction.findOne({ transactionId: req.body['data[transactionId]'] });
+        // if (isExists) return res.sendStatus(200);
 
         transaction.asmachta = req.body['data[asmachta]'];
         transaction.cardSuffix = req.body['data[cardSuffix]'];
@@ -56,7 +56,8 @@ router.post("/payment", urlencodedParser, async (req, res) => {
         const addedOrder = await ordersLogic.createOrderAsync(order);
         transaction.orderId = new mongoose.Types.ObjectId(addedOrder._id);
         await transaction.save();
-
+        const pageCode = req.body['data[customFields][cField2]'];
+        await paymentsLogic.approveTransaction(transaction,pageCode);
         return res.sendStatus(200);
     }
     catch (err) {
