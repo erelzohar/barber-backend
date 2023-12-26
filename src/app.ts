@@ -11,7 +11,11 @@ import paymentController from './controllers/payment-controller';
 const app = express();
 const allowedOrigins = process.env.NODE_ENV !== "production" ? "*" : ["https://www.donaroma-il.com", "https://meshulam.co.il"];
 
-app.use(cors({ origin: allowedOrigins,credentials:true }));
+app.use(cors({
+    origin: allowedOrigins,
+    credentials: true,
+    methods: ['GET', 'POST', 'UPDATE', 'DELETE']
+}));
 app.use(express.json());
 app.use(expressFileUpload());
 app.use("/", expressRateLimit({

@@ -9,10 +9,7 @@ import Order from "../models/Order";
 import mongoose from "mongoose";
 
 const router = express.Router();
-router.use(bodyParser.json());
-
 router.use(bodyParser.json({ type: 'application/*+json' }));
-
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 router.post("/payment", urlencodedParser, async (req, res) => {
