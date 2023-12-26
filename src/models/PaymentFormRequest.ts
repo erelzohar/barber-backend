@@ -1,6 +1,5 @@
 class PaymentFormRequest {
     constructor(request:PaymentFormRequest){
-        this.sum = request.sum;
         this.successUrl = request.successUrl;
         this.description = request.description;
         this.cancelUrl = request.cancelUrl;
@@ -12,7 +11,6 @@ class PaymentFormRequest {
         this.maxPaymentNum = request.maxPaymentNum;
     }
     userId:string;
-    sum: number;
     successUrl: string;
     description: string;
     cancelUrl: string;

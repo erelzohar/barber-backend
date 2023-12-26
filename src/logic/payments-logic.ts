@@ -3,9 +3,11 @@ import PaymentFormRequest from '../models/PaymentFormRequest';
 import FormData from 'form-data';
 import { config } from "../config";
 import { TransactionModel } from '../models/Transaction';
+import { OrderModel } from '../models/Order';
+import Product from '../models/Product';
 
 
-async function approveTransaction(transaction: TransactionModel, pageCode: string) {
+async function approveTransactionAsync(transaction: TransactionModel, pageCode: string) {
     const formData = new FormData();
     formData.append("pageCode", pageCode);
     formData.append("asmachta", transaction.asmachta);
@@ -46,38 +48,47 @@ async function approveTransaction(transaction: TransactionModel, pageCode: strin
 
 async function getPaymentFormAsync(data: PaymentFormRequest) {
     const formData = new FormData();
-    formData.append("check", '45454');
-    console.log("DATA",data);
     formData.append("cField1", data.orderJSON);
-    console.log(config);
     formData.append("cField2", config.meshulam.pageCodes[(data.pageCode as "bit" || "applePay" || "googlePay" || "credit")]);
     formData.append("description", data.description);
     formData.append("userId", config.meshulam.UserId);
     formData.append("maxPaymentNum", data.maxPaymentNum);
     formData.append("cancelUrl", data.cancelUrl);
     formData.append("successUrl", data.successUrl);
-    console.log("pageCode start");
     formData.append("pageCode", config.meshulam.pageCodes[(data.pageCode as "bit" || "applePay" || "googlePay" || "credit")]);
     formData.append("pageField[fullName]", data.fullName);
     formData.append("pageField[phone]", data.phone);
     formData.append("pageField[email]", data.email);
-    formData.append("sum", data.sum);
 
-    console.log("formData",formData)
+    const order = JSON.parse(data.orderJSON);
+    const sum = await calcOrderAsync(order);
+
+    formData.append("sum", sum);
 
     const res = await axios({
         method: "post",
         url: "https://sandbox.meshulam.co.il/api/light/server/1.0/createPaymentProcess/",
         data: formData
-    })
+    });
 
     if (res.data?.data.url) return res.data.data.url;
     return res.data;
 }
 
 
+async function calcOrderAsync(order: OrderModel) {
+    let sum = 0;
+    await Promise.all(order.items.map(async (i) => {
+        const product = await Product.findById(i.product._id);
+        let price = product.price * i.quantity;
+        sum += price;
+    }));
+    if (order.deliveryType === "express") sum += 50;
+    else if (order.deliveryType === "regular" && sum < 200) sum += 35;
+    return sum;
+}
 
 export default {
     getPaymentFormAsync,
-    approveTransaction
+    approveTransactionAsync
 }

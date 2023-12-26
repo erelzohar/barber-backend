@@ -9,13 +9,12 @@ import authController from "./controllers/auth-controller";
 import messagesController from "./controllers/messages-controller";
 import paymentController from './controllers/payment-controller';
 const app = express();
-const corsOptions = {
-    origin: ["https://www.donaroma-il.com","https://meshulam.co.il"]
-}
-app.use(cors(corsOptions));
+const allowedOrigins = process.env.NODE_ENV !== "production" ? "*" : ["https://www.donaroma-il.com", "https://meshulam.co.il"];
+console.log(allowedOrigins);
+
 app.use(express.json());
 app.use(expressFileUpload());
-
+app.use(cors({ origin: allowedOrigins }));
 app.use("/", expressRateLimit({
     windowMs: 5000,
     max: 100,

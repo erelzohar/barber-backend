@@ -60,8 +60,8 @@ router.post("/payment", urlencodedParser, async (req, res) => {
         await transaction.save();
 
         const pageCode = req.body['data[customFields][cField2]'];
-        await paymentsLogic.approveTransaction(transaction,pageCode);
-        
+        await paymentsLogic.approveTransactionAsync(transaction, pageCode);
+
         return res.sendStatus(200);
     }
     catch (err) {
@@ -73,6 +73,8 @@ router.post("/get-payment-form", async (req, res) => {
     try {
         const formRequest = new PaymentFormRequest(req.body);
         const response = await paymentsLogic.getPaymentFormAsync(formRequest);
+        console.log(response);
+        
         res.send(response);
     }
     catch (err) {
