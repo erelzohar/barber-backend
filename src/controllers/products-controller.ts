@@ -11,6 +11,8 @@ import Sale from "../models/Sale";
 const router = express.Router();
 router.get("/", async (req, res) => {
     try {
+        console.log(req.get('origin'));
+        
         const products = await productsLogic.getAllProductsAsync();
         res.json(products);
     }

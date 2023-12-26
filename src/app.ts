@@ -12,9 +12,9 @@ const app = express();
 const allowedOrigins = process.env.NODE_ENV !== "production" ? "*" : ["https://www.donaroma-il.com", "https://meshulam.co.il"];
 console.log(allowedOrigins);
 
+app.use(cors({ origin: allowedOrigins }));
 app.use(express.json());
 app.use(expressFileUpload());
-app.use(cors({ origin: allowedOrigins }));
 app.use("/", expressRateLimit({
     windowMs: 5000,
     max: 100,
