@@ -14,7 +14,7 @@ const allowedOrigins = process.env.NODE_ENV !== "production" ? "*" : ["https://w
 app.use(cors({
     origin: allowedOrigins,
     credentials: true,
-    methods: ['GET', 'POST', 'UPDATE', 'DELETE']
+    methods: ['GET', 'POST', 'DELETE']
 }));
 app.use(express.json());
 app.use(expressFileUpload());
