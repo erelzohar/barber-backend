@@ -12,6 +12,8 @@ const router = express.Router();
 router.get("/", async (req, res) => {
     try {
         console.log(req.get('origin'));
+        console.log(req.headers);
+        
         
         const products = await productsLogic.getAllProductsAsync();
         res.json(products);
