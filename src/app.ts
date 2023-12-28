@@ -1,26 +1,16 @@
 import { config } from "./config";
 import express, { Request, Response } from "express";
 import mongoose from "mongoose";
-import cors from "cors";
 import expressRateLimit from "express-rate-limit";
 import expressFileUpload from "express-fileupload";
 import productsController from "./controllers/products-controller";
 import authController from "./controllers/auth-controller";
 import messagesController from "./controllers/messages-controller";
 import paymentController from './controllers/payment-controller';
+import useCors from "./middleware/cors";
 const app = express();
-const allowedOrigins = process.env.NODE_ENV !== "production" ? "*" : ["https://www.donaroma-il.com", "https://meshulam.co.il"];
 
-app.options('*', cors({
-    origin: allowedOrigins,
-    credentials: true,
-    methods: ['GET', 'POST', 'DELETE'],
-}));
-app.use(cors({
-    origin: allowedOrigins,
-    credentials: true,
-    methods: ['GET', 'POST', 'DELETE']
-}));
+app.use(useCors);
 app.use(express.json());
 app.use(expressFileUpload());
 app.use("/", expressRateLimit({
@@ -30,8 +20,8 @@ app.use("/", expressRateLimit({
 }));
 
 
-app.get("/", (req: Request, res: Response) => {
-    res.json("TSNODE");
+app.get("/ping", (req: Request, res: Response) => {
+    res.json("PONG");
 });
 
 app.use("/api/products", productsController);

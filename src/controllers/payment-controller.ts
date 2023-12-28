@@ -70,7 +70,6 @@ router.post("/get-payment-form", async (req, res) => {
     try {
         const formRequest = new PaymentFormRequest(req.body);
         const response = await paymentsLogic.getPaymentFormAsync(formRequest);
-        console.log(response);
         
         res.send(response);
     }
