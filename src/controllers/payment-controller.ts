@@ -45,7 +45,8 @@ router.post("/payment", urlencodedParser, async (req, res) => {
         transaction.processId = req.body['data[processId]'];
         transaction.processToken = req.body['data[processToken]'];
         transaction.transactionToken = req.body['data[transactionToken]'];
-
+        console.log(req.body['data[customFields][cField1]']);
+        
         const parsedOrder = req.body['data[customFields][cField1]'] ? JSON.parse(req.body['data[customFields][cField1]']) : null;
         const order = new Order(parsedOrder);
 
