@@ -52,7 +52,8 @@ router.post("/payment", urlencodedParser, async (req, res) => {
         //     // then replace the new value back to original string
         //     jsonStr = jsonStr.replace(strVal, newVal);
         // })
-
+        console.log(JSON.parse(req.body['data[customFields][cField1]']));
+        
         const parsedOrder = req.body['data[customFields][cField1]'] ? JSON.parse(req.body['data[customFields][cField1]']) : null;
         const order = new Order(parsedOrder);
 
