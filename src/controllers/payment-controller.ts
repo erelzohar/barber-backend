@@ -45,8 +45,14 @@ router.post("/payment", urlencodedParser, async (req, res) => {
         transaction.processId = req.body['data[processId]'];
         transaction.processToken = req.body['data[processToken]'];
         transaction.transactionToken = req.body['data[transactionToken]'];
-        console.log(req.body['data[customFields][cField1]']);
-        
+        // let strVals = req.body['data[customFields][cField1]'].match(/(?<=":")([^:]+?)(?="(?=,|}|]))/g) ;
+        // strVals.forEach(strVal => {
+        //     // we replace all quotes with literal quotes
+        //     let newVal = strVal.replace(/("|“|”)/g, '\\"');
+        //     // then replace the new value back to original string
+        //     jsonStr = jsonStr.replace(strVal, newVal);
+        // })
+
         const parsedOrder = req.body['data[customFields][cField1]'] ? JSON.parse(req.body['data[customFields][cField1]']) : null;
         const order = new Order(parsedOrder);
 
@@ -71,7 +77,7 @@ router.post("/get-payment-form", async (req, res) => {
     try {
         const formRequest = new PaymentFormRequest(req.body);
         const response = await paymentsLogic.getPaymentFormAsync(formRequest);
-        
+
         res.send(response);
     }
     catch (err) {
