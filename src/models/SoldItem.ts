@@ -1,7 +1,7 @@
-import { ProductModel } from "./Product";
+import mongoose from "mongoose";
 
 export class SoldItem{
-    public product: ProductModel;
+    public productId:  mongoose.Types.ObjectId;
     public quantity: number;
     public color?: string = null;
     public scent?: string = null;

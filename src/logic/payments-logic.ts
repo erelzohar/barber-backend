@@ -48,10 +48,7 @@ async function approveTransactionAsync(transaction: TransactionModel, pageCode: 
 
 async function getPaymentFormAsync(data: PaymentFormRequest) {
     const formData = new FormData();
-    console.log(JSON.parse(data.orderJSON));
-    // console.log(JSON.parse(data.orderJSON).items);
-    
-    
+    console.log(JSON.parse(data.orderJSON));      
     formData.append("cField1", data.orderJSON);
     formData.append("cField2", config.meshulam.pageCodes[(data.pageCode as "bit" || "applePay" || "googlePay" || "credit")]);
     formData.append("description", data.description);
@@ -83,7 +80,7 @@ async function getPaymentFormAsync(data: PaymentFormRequest) {
 async function calcOrderAsync(order: OrderModel) {
     let sum = 0;
     await Promise.all(order.items.map(async (i) => {
-        const product = await Product.findById(i.product._id);
+        const product = await Product.findById(i.productId);
         let price = product.price * i.quantity;
         sum += price;
     }));

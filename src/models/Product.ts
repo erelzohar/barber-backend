@@ -3,17 +3,17 @@ import mongoose, { Schema, Document } from "mongoose";
 interface ProductI {
     name: string;
     price: number;
-    category: Schema.Types.ObjectId;
+    category:  mongoose.Types.ObjectId;
     colors: string[];
     description: string;
-    scentCategory: Schema.Types.ObjectId;
+    scentCategory:  mongoose.Types.ObjectId;
     level: number;
     scents: string[];
     isRecommended: boolean;
     images: string[];
     stock: number;
     sortIndex: number;
-    sales: Schema.Types.ObjectId[];
+    sales:  mongoose.Types.ObjectId[];
 }
 
 export interface ProductModel extends ProductI, Document<string> { }

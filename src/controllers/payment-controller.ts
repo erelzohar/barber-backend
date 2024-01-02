@@ -55,19 +55,10 @@ router.post("/payment", urlencodedParser, async (req, res) => {
         console.log(req.body['data[customFields][cField1]']);
 
         //console.log(JSON.parse(req.body['data[customFields][cField1]']));
-        let fixedJson = req.body['data[customFields][cField1]'];
-        fixedJson.replace(/\\n/g, "\\n")
-            .replace(/\\'/g, "\\'")
-            .replace(/\\"/g, '\\"')
-            .replace(/\\&/g, "\\&")
-            .replace(/\\r/g, "\\r")
-            .replace(/\\t/g, "\\t")
-            .replace(/\\b/g, "\\b")
-            .replace(/\\f/g, "\\f");
-        fixedJson = fixedJson.replace(/[\u0000-\u0019]+/g, "");
-        const parsedOrder = JSON.parse(fixedJson);
+
+        const parsedOrder = JSON.parse(req.body['data[customFields][cField1]']);
         console.log(parsedOrder);
-        
+
         const order = new Order(parsedOrder);
 
         order.transactionId = new mongoose.Types.ObjectId(transaction._id);

@@ -1,7 +1,8 @@
+import Product from "../models/Product";
 import { OrderModel } from "../models/Order";
 
-function createOrderHtml(order: OrderModel) {
-    return `<!DOCTYPE HTML
+async function createOrderHtmlAsync(order: OrderModel) {
+  return `<!DOCTYPE HTML
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
   <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml"
     xmlns:o="urn:schemas-microsoft-com:office:office">
@@ -452,7 +453,9 @@ function createOrderHtml(order: OrderModel) {
                             </tr>
                           </tbody>
                         </table>
-                        ${order.items.map(i => `<table style="font-family:arial,helvetica,sans-serif;" role="presentation" cellpadding="0"
+                        ${await Promise.all(order.items.map(async i => {
+                        const product = await Product.findById(i.productId);
+                        return `<table style="font-family:arial,helvetica,sans-serif;" role="presentation" cellpadding="0"
                         cellspacing="0" width="100%" border="0">
                         <tbody>
                           <tr>
@@ -463,12 +466,13 @@ function createOrderHtml(order: OrderModel) {
                                 style="font-size: 14px; color: #333333; line-height: 140%; text-align: center; word-wrap: break-word;">
                                 <p dir="rtl" style="font-size: 14px; line-height: 140%;"><span
                                     style="font-family: arial, helvetica, sans-serif; font-size: 14px; line-height: 19.6px;"><span
-                                      style="font-size: 18px; line-height: 25.2px;">${i.product.name + " - "+ (i.color ? i.color + " - " : i.ml ? i.ml + "ml - ":"") + (i.scent ? i.scent : "") + " X"+i.quantity.toString()}</span></span></p>
+                                      style="font-size: 18px; line-height: 25.2px;">${product.name + " - " + (i.color ? i.color + " - " : i.ml ? i.ml + "ml - " : "") + (i.scent ? i.scent : "") + " X" + i.quantity.toString()}</span></span></p>
                               </div>
                             </td>
                           </tr>
                         </tbody>
-                      </table>`)}
+                      </table>`
+  }))}
                         <!--[if (!mso)&(!IE)]><!-->
                       </div><!--<![endif]-->
                     </div>
@@ -991,9 +995,9 @@ function createOrderHtml(order: OrderModel) {
   </body>
   
   </html>`
-  
+
 }
 
 export default {
-    createOrderHtml
+  createOrderHtmlAsync
 }

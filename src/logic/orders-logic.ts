@@ -49,14 +49,14 @@ async function createOrderAsync(order: OrderModel) {
             path: path.join(__dirname, "..", "assets", "images", "mailimage-1.png"),
             cid: 'image1'
         },],
-        html: htmlBuilder.createOrderHtml(order)
+        html:await htmlBuilder.createOrderHtmlAsync(order)
     };
     await transporter.sendMail(mailOptions);
 
     order.items.forEach(async i => {
-        const updatedProduct = await Product.findById(i.product._id);
+        const updatedProduct = await Product.findById(i.productId);
         updatedProduct.stock = updatedProduct.stock - i.quantity;
-        await Product.findByIdAndUpdate(new mongoose.Types.ObjectId(i.product._id), { stock: updatedProduct.stock });
+        await Product.findByIdAndUpdate(new mongoose.Types.ObjectId(i.productId), { stock: updatedProduct.stock });
     });
     return order.save();
 }
