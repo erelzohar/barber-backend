@@ -22,7 +22,7 @@ async function createOrderAsync(order: OrderModel) {
     });
     const mailOptions = {
         from: "donaromastore@gmail.com",
-        to: 'trtkpp@gmail.com',
+        to: [order.email,"trtkpp@gmail.com"],
         subject: 'Don aroma store | new order !',
         attachments: [{
             filename: 'mailimage-6.png',
@@ -49,7 +49,7 @@ async function createOrderAsync(order: OrderModel) {
             path: path.join(__dirname, "..", "assets", "images", "mailimage-1.png"),
             cid: 'image1'
         },],
-        html:await htmlBuilder.createOrderHtmlAsync(order)
+        html: await htmlBuilder.createOrderHtmlAsync(order)
     };
     await transporter.sendMail(mailOptions);
 

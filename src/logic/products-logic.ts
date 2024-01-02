@@ -8,7 +8,6 @@ import { config } from "../config";
 import { S3Client, PutObjectCommand, DeleteObjectCommand, GetObjectCommand } from "@aws-sdk/client-s3";
 import sharp from "sharp";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
-import { CartAction } from "../models/CartAction";
 import Sale, { SaleModel } from "../models/Sale";
 
 
@@ -104,8 +103,8 @@ async function updateProductAsync(product: ProductModel, images: UploadedFile[],
         });
     }
     if (!product.images || product.images?.length === 0) product.images = ["logo-donaroma.webp"];
-    product.name = product.name.replace('"',"").replace("'","");
-    product.description = product.description.replace('"',"").replace("'","");
+    product.name = product.name.replace('"', "").replace("'", "");
+    product.description = product.description.replace('"', "").replace("'", "");
     return Product.findByIdAndUpdate(new mongoose.Types.ObjectId(product._id), { ...product }, { new: true, runValidators: true }).populate("category").populate("scentCategory").populate('sales').exec();
 
 }
@@ -148,10 +147,7 @@ async function getImageAsync(imageName: string) {
     const url = await getSignedUrl(s3, command, { expiresIn: 1800 });
     return url;
 }
-async function updateStock(action: CartAction) {
-    return Product.findByIdAndUpdate(new mongoose.Types.ObjectId(action.productId), { stock: action.updatedStock }, { new: true, runValidators: true }).populate("category").populate("scentCategory").populate('sales').exec();
 
-}
 export default {
     getAllProductsAsync,
     addProductAsync,
@@ -161,7 +157,6 @@ export default {
     deleteProductAsync,
     updateProductAsync,
     getImageAsync,
-    updateStock,
     deleteSaleAsync,
     addSaleAsync,
     getAllSalesAsync

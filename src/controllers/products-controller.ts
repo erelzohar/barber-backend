@@ -5,7 +5,6 @@ import { UploadedFile } from "express-fileupload";
 import getError from "../helpers/errors-helper";
 import path from "path";
 import verifyAdmin from "../middleware/verifyAdmin";
-import { CartAction } from "../models/CartAction";
 import Sale from "../models/Sale";
 
 const router = express.Router();
@@ -84,19 +83,6 @@ router.post("/", verifyAdmin, async (req, res) => {
         res.status(500).json(getError(err as Error));
     }
 });
-router.post("/cart-action", async (req, res) => {
-    try {
-        const action = new CartAction();
-        action.productId = req.body.productId;
-        action.updatedStock = +req.body.updatedStock;
-        const updated = await productsLogic.updateStock(action);
-        res.json(updated);
-    }
-    catch (err) {
-        res.status(500).json(getError(err as Error));
-    }
-});
-
 router.get("/sales", async (req, res) => {
     try {
         const sales = await productsLogic.getAllSalesAsync();        

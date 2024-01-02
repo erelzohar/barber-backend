@@ -472,7 +472,7 @@ async function createOrderHtmlAsync(order: OrderModel) {
                           </tr>
                         </tbody>
                       </table>`
-  }))}
+                      }))}
                         <!--[if (!mso)&(!IE)]><!-->
                       </div><!--<![endif]-->
                     </div>
@@ -965,7 +965,7 @@ async function createOrderHtmlAsync(order: OrderModel) {
                                   style="font-size: 14px; color: #7e8c8d; line-height: 140%; text-align: center; word-wrap: break-word;">
                                   <p style="font-size: 14px; line-height: 140%;"><span
                                       style="font-size: 14px; line-height: 19.6px; font-family: arial, helvetica, sans-serif;">©EZ
-                                      Webs Solutions | Israel</span></p>
+                                      Web Solutions | Israel</span></p>
                                 </div>
   
                               </td>

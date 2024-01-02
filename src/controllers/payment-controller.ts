@@ -45,20 +45,8 @@ router.post("/payment", urlencodedParser, async (req, res) => {
         transaction.processId = req.body['data[processId]'];
         transaction.processToken = req.body['data[processToken]'];
         transaction.transactionToken = req.body['data[transactionToken]'];
-        // let strVals = req.body['data[customFields][cField1]'].match(/(?<=":")([^:]+?)(?="(?=,|}|]))/g) ;
-        // strVals.forEach(strVal => {
-        //     // we replace all quotes with literal quotes
-        //     let newVal = strVal.replace(/("|“|”)/g, '\\"');
-        //     // then replace the new value back to original string
-        //     jsonStr = jsonStr.replace(strVal, newVal);
-        // })
-        console.log(req.body['data[customFields][cField1]']);
-
-        //console.log(JSON.parse(req.body['data[customFields][cField1]']));
 
         const parsedOrder = JSON.parse(req.body['data[customFields][cField1]']);
-        console.log(parsedOrder);
-
         const order = new Order(parsedOrder);
 
         order.transactionId = new mongoose.Types.ObjectId(transaction._id);
