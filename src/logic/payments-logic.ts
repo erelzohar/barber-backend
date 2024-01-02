@@ -48,7 +48,7 @@ async function approveTransactionAsync(transaction: TransactionModel, pageCode: 
 
 async function getPaymentFormAsync(data: PaymentFormRequest) {
     const formData = new FormData();
-    // console.log(JSON.parse(data.orderJSON));
+    console.log(JSON.parse(data.orderJSON));
     // console.log(JSON.parse(data.orderJSON).items);
     
     
