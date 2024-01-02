@@ -54,7 +54,7 @@ router.post("/payment", urlencodedParser, async (req, res) => {
         // })
         console.log(req.body['data[customFields][cField1]']);
 
-        console.log(JSON.parse(req.body['data[customFields][cField1]']));
+        //console.log(JSON.parse(req.body['data[customFields][cField1]']));
         let fixedJson = req.body['data[customFields][cField1]'];
         fixedJson.replace(/\\n/g, "\\n")
             .replace(/\\'/g, "\\'")
