@@ -566,7 +566,7 @@ async function createOrderHtmlAsync(order: OrderModel) {
                                 <!--[if mso]><table width="100%"><tr><td><![endif]-->
                                 <h4
                                   dir="rtl" style="margin: 0px; line-height: 140%; text-align: center; word-wrap: break-word; font-family: tahoma,arial,helvetica,sans-serif; font-size: 16px; font-weight: 400;">
-                                  <strong>פרטי איש קשר:</strong>${order.fullName} &nbsp;${order.email}&nbsp;${order.phone}</h4>
+                                  <strong>פרטי איש קשר:</strong>&nbsp;${order.fullName} &nbsp;${order.email}&nbsp;${order.phone}</h4>
                                 <!--[if mso]></td></tr></table><![endif]-->
   
                               </td>

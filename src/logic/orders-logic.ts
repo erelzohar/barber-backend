@@ -22,7 +22,7 @@ async function createOrderAsync(order: OrderModel) {
     });
     const mailOptions = {
         from: "donaromastore@gmail.com",
-        to: [order.email,"trtkpp@gmail.com"],
+        to: [order.email, "trtkpp@gmail.com"],
         subject: 'Don aroma store | new order !',
         attachments: [{
             filename: 'mailimage-6.png',
@@ -56,6 +56,7 @@ async function createOrderAsync(order: OrderModel) {
     order.items.forEach(async i => {
         const updatedProduct = await Product.findById(i.productId);
         updatedProduct.stock = updatedProduct.stock - i.quantity;
+        if (updatedProduct.stock < 0) updatedProduct.stock = 0;
         await Product.findByIdAndUpdate(new mongoose.Types.ObjectId(i.productId), { stock: updatedProduct.stock });
     });
     return order.save();

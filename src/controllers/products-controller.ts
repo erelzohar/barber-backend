@@ -71,9 +71,13 @@ router.post("/", verifyAdmin, async (req, res) => {
         if ((images as UploadedFile)?.name) images = [(images as UploadedFile)];
 
         const productToUpsert = new Product(req.body);
+        console.log(productToUpsert);
+        
         if (productToUpsert.description?.length < 2) productToUpsert.description = productToUpsert.name + " מבית דון ארומה";
         if (req.body._id) {
             const updatedProduct = await productsLogic.updateProductAsync(productToUpsert, (images as UploadedFile[]), imagesToDelete);
+            console.log(updatedProduct);
+            
             return res.json(updatedProduct);
         }
         const addedProduct = await productsLogic.addProductAsync(productToUpsert, (images as UploadedFile[]));
