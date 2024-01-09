@@ -58,6 +58,7 @@ async function createOrderAsync(order: OrderModel) {
         updatedProduct.stock = updatedProduct.stock - i.quantity;
         if (updatedProduct.stock < 0) updatedProduct.stock = 0;
         await Product.findByIdAndUpdate(new mongoose.Types.ObjectId(i.productId), { stock: updatedProduct.stock });
+        i.productId = new mongoose.Types.ObjectId(i.productId);
     });
     return order.save();
 }

@@ -6,6 +6,7 @@ import expressFileUpload from "express-fileupload";
 import productsController from "./controllers/products-controller";
 import authController from "./controllers/auth-controller";
 import messagesController from "./controllers/messages-controller";
+import ordersController from "./controllers/orders-controller";
 import paymentController from './controllers/payment-controller';
 import useCors from "./middleware/cors";
 const app = express();
@@ -25,6 +26,7 @@ app.get("/ping", (req: Request, res: Response) => {
 });
 
 app.use("/api/products", productsController);
+app.use("/api/orders", ordersController);
 app.use("/api/auth", authController);
 app.use("/api/message", messagesController);
 app.use("/api/meshulam-test", paymentController);
