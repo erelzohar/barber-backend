@@ -22,7 +22,7 @@ async function createOrderAsync(order: OrderModel) {
     });
     const mailOptions = {
         from: "donaromastore@gmail.com",
-        to: [order.email, "trtkpp@gmail.com"],
+        to: [order.email, "donaroma.sr@gmail.com"],
         subject: 'Don aroma store | new order !',
         attachments: [{
             filename: 'mailimage-6.png',
