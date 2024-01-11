@@ -38,7 +38,7 @@ async function approveTransactionAsync(transaction: TransactionModel, pageCode: 
 
     const res = await axios({
         method: "post",
-        url: "https://sandbox.meshulam.co.il/api/light/server/1.0/approveTransaction/",
+        url: "https://secure.meshulam.co.il/api/light/server/1.0/approveTransaction/",
         data: formData
     })
 
