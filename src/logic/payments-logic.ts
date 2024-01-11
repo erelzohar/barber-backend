@@ -45,13 +45,12 @@ async function approveTransactionAsync(transaction: TransactionModel, pageCode: 
     return res.data;
 }
 
-
 async function getPaymentFormAsync(data: PaymentFormRequest) {
     const formData = new FormData();
     formData.append("cField1", data.orderJSON);
     formData.append("cField2", config.meshulam.pageCodes[(data.pageCode as "bit" || "applePay" || "googlePay" || "credit")]);
     formData.append("description", data.description);
-    formData.append("userId", config.meshulam.UserId);
+    formData.append("userId", config.meshulam.userId);
     formData.append("maxPaymentNum", data.maxPaymentNum);
     formData.append("cancelUrl", data.cancelUrl);
     formData.append("successUrl", data.successUrl);
@@ -67,7 +66,7 @@ async function getPaymentFormAsync(data: PaymentFormRequest) {
 
     const res = await axios({
         method: "post",
-        url: "https://sandbox.meshulam.co.il/api/light/server/1.0/createPaymentProcess/",
+        url: "https://secure.meshulam.co.il/api/light/server/1.0/createPaymentProcess/",
         data: formData
     });
 

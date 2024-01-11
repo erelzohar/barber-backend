@@ -16,6 +16,11 @@ const CREDIT_PAGECODE = process.env.CREDIT_PAGECODE || "";
 const BIT_PAGECODE = process.env.BIT_PAGECODE || "";
 const APPLEPAY_PAGECODE = process.env.APPLEPAY_PAGECODE || "";
 const GOOGLEPAY_PAGECODE = process.env.GOOGLEPAY_PAGECODE || "";
+const MESHULAM_TEST_USER_ID = process.env.MESHULAM_USER_ID || "";
+const CREDIT_TEST_PAGECODE = process.env.CREDIT_PAGECODE || "";
+const BIT_TEST_PAGECODE = process.env.BIT_PAGECODE || "";
+const APPLEPAY_TEST_PAGECODE = process.env.APPLEPAY_PAGECODE || "";
+const GOOGLEPAY_TEST_PAGECODE = process.env.GOOGLEPAY_PAGECODE || "";
 
 
 export const config = {
@@ -23,12 +28,19 @@ export const config = {
         url: MONGO_URL
     },
     meshulam:{
-        UserId: MESHULAM_USER_ID,
+        userId: MESHULAM_USER_ID,
+        testUserId: MESHULAM_TEST_USER_ID,
         pageCodes:{
             bit:BIT_PAGECODE,
             applePay:APPLEPAY_PAGECODE,
             credit:CREDIT_PAGECODE,
             googlePay:GOOGLEPAY_PAGECODE
+        },
+        testPageCodes:{
+            bit:BIT_TEST_PAGECODE,
+            applePay:APPLEPAY_TEST_PAGECODE,
+            credit:CREDIT_TEST_PAGECODE,
+            googlePay:GOOGLEPAY_TEST_PAGECODE
         }
     },
     server: {
