@@ -17,9 +17,6 @@ router.post("/payment", urlencodedParser, async (req, res) => {
         const transaction = new Transaction(req.body);
         if (transaction.status === 0) return res.sendStatus(200);
 
-        // const isExists = await Transaction.findOne({ transactionId: req.body['data[transactionId]'] });
-        // if (isExists) return res.sendStatus(200);
-
         transaction.asmachta = req.body['data[asmachta]'];
         transaction.cardSuffix = req.body['data[cardSuffix]'];
         transaction.cardType = req.body['data[cardType]'];

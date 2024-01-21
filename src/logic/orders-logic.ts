@@ -62,9 +62,15 @@ async function createOrderAsync(order: OrderModel) {
     return order.save();
 }
 
-
-
+function deleteOrderAsync(_id: string) {
+    return Order.deleteOne({ _id }).exec();
+}
+function updateOrderAsync(order: OrderModel) {
+    return Order.findByIdAndUpdate(order._id, order, { new: true, runValidators: true });
+}
 export default {
     getAllOrdersAsync,
-    createOrderAsync
+    createOrderAsync,
+    deleteOrderAsync,
+    updateOrderAsync
 }

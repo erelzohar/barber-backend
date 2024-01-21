@@ -16,31 +16,24 @@ const CREDIT_PAGECODE = process.env.CREDIT_PAGECODE || "";
 const BIT_PAGECODE = process.env.BIT_PAGECODE || "";
 const APPLEPAY_PAGECODE = process.env.APPLEPAY_PAGECODE || "";
 const GOOGLEPAY_PAGECODE = process.env.GOOGLEPAY_PAGECODE || "";
-const MESHULAM_TEST_USER_ID = process.env.MESHULAM_USER_ID || "";
-const CREDIT_TEST_PAGECODE = process.env.CREDIT_PAGECODE || "";
-const BIT_TEST_PAGECODE = process.env.BIT_PAGECODE || "";
-const APPLEPAY_TEST_PAGECODE = process.env.APPLEPAY_PAGECODE || "";
-const GOOGLEPAY_TEST_PAGECODE = process.env.GOOGLEPAY_PAGECODE || "";
+const MESHULAM_TEST_USER_ID = process.env.MESHULAM_TEST_USER_ID || "";
+const CREDIT_TEST_PAGECODE = process.env.CREDIT_TEST_PAGECODE || "";
+const BIT_TEST_PAGECODE = process.env.BIT_TEST_PAGECODE || "";
+const APPLEPAY_TEST_PAGECODE = process.env.APPLEPAY_TEST_PAGECODE || "";
+const GOOGLEPAY_TEST_PAGECODE = process.env.GOOGLEPAY_TEST_PAGECODE || "";
 
 
 export const config = {
     mongo: {
         url: MONGO_URL
     },
-    meshulam:{
-        userId: MESHULAM_USER_ID,
-        testUserId: MESHULAM_TEST_USER_ID,
-        pageCodes:{
-            bit:BIT_PAGECODE,
-            applePay:APPLEPAY_PAGECODE,
-            credit:CREDIT_PAGECODE,
-            googlePay:GOOGLEPAY_PAGECODE
-        },
-        testPageCodes:{
-            bit:BIT_TEST_PAGECODE,
-            applePay:APPLEPAY_TEST_PAGECODE,
-            credit:CREDIT_TEST_PAGECODE,
-            googlePay:GOOGLEPAY_TEST_PAGECODE
+    meshulam: {
+        userId: process.env.NODE_ENV !== "production" ? MESHULAM_TEST_USER_ID : MESHULAM_USER_ID,
+        pageCodes: {
+            bit: process.env.NODE_ENV !== "production" ? BIT_TEST_PAGECODE : BIT_PAGECODE,
+            applePay: process.env.NODE_ENV !== "production" ? APPLEPAY_TEST_PAGECODE : APPLEPAY_PAGECODE,
+            credit: process.env.NODE_ENV !== "production" ? CREDIT_TEST_PAGECODE : CREDIT_PAGECODE,
+            googlePay: process.env.NODE_ENV !== "production" ? GOOGLEPAY_TEST_PAGECODE : GOOGLEPAY_PAGECODE
         }
     },
     server: {

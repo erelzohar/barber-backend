@@ -6,6 +6,7 @@ import { TransactionModel } from '../models/Transaction';
 import { OrderModel } from '../models/Order';
 import Product from '../models/Product';
 
+const domain = process.env.NODE_ENV !== "production" ? "sandbox.meshulam.co.il" : "secure.meshulam.co.il";
 
 async function approveTransactionAsync(transaction: TransactionModel, pageCode: string) {
     const formData = new FormData();
@@ -38,7 +39,7 @@ async function approveTransactionAsync(transaction: TransactionModel, pageCode: 
 
     const res = await axios({
         method: "post",
-        url: "https://secure.meshulam.co.il/api/light/server/1.0/approveTransaction/",
+        url: `https://${domain}/api/light/server/1.0/approveTransaction/`,
         data: formData
     })
 
@@ -48,7 +49,7 @@ async function approveTransactionAsync(transaction: TransactionModel, pageCode: 
 async function getPaymentFormAsync(data: PaymentFormRequest) {
     const formData = new FormData();
     formData.append("cField1", data.orderJSON);
-    formData.append("cField2", config.meshulam.pageCodes[(data.pageCode as "bit" || "applePay" || "googlePay" || "credit")]);
+    formData.append("cField2", config.meshulam.pageCodes[(data.pageCode as "bit" || "applePay" || "googlePay" || "credit")]);//for transaction approve
     formData.append("description", data.description);
     formData.append("userId", config.meshulam.userId);
     formData.append("maxPaymentNum", data.maxPaymentNum);
@@ -61,12 +62,11 @@ async function getPaymentFormAsync(data: PaymentFormRequest) {
 
     const order = JSON.parse(data.orderJSON);
     const sum = await calcOrderAsync(order);
-
     formData.append("sum", sum);
 
     const res = await axios({
         method: "post",
-        url: "https://secure.meshulam.co.il/api/light/server/1.0/createPaymentProcess/",
+        url: `https://${domain}/api/light/server/1.0/createPaymentProcess/`,
         data: formData
     });
 
