@@ -1,15 +1,16 @@
 import mongoose, { Document, Schema } from "mongoose";
 
-export interface ICustomer {
-    fullName:string;
+export interface ILine {
+    name:string;
     phone:string;
+    timestamp:string;
 }
 
-export interface CustomerModel extends ICustomer, Document<string> { }
+export interface LineModel extends ILine, Document<string> { }
 
-const CustomerScheme: Schema = new Schema({
+const LineScheme: Schema = new Schema({
 
-    fullName: {
+    name: {
         type: String,
         required: [true, "Missing Name"],
         minlength: [2, "Min 2 characters"],
@@ -20,9 +21,13 @@ const CustomerScheme: Schema = new Schema({
         required: [true, "Missing phone"],
         minlength: [9, "Min 9 characters"],
         maxlength: [13, "Max 13 characters"],
+    },
+    timestamp: {
+        type: String,
+        required: [true, "Missing timestamp"]
     }
 }, { versionKey: false, toJSON: { virtuals: true }, id: false });
 
 
-export default mongoose.model<CustomerModel>("Customer", CustomerScheme);
+export default mongoose.model<LineModel>("Line", LineScheme);
 

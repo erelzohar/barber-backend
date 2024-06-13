@@ -3,11 +3,11 @@ import express, { Request, Response } from "express";
 import mongoose from "mongoose";
 import expressRateLimit from "express-rate-limit";
 import expressFileUpload from "express-fileupload";
-import productsController from "./controllers/products-controller";
 import authController from "./controllers/auth-controller";
-import messagesController from "./controllers/messages-controller";
-import ordersController from "./controllers/orders-controller";
-import paymentController from './controllers/payment-controller';
+import linesController from "./controllers/lines-controller";
+import customersController from "./controllers/customers-controller";
+import smsController from "./controllers/sms-controller";
+import adminController from "./controllers/admin-controller";
 import useCors from "./middleware/cors";
 const app = express();
 
@@ -20,16 +20,15 @@ app.use("/", expressRateLimit({
     message: "Are You a Hacker?"
 }));
 
-
 app.get("/ping", (req: Request, res: Response) => {
     res.json("PONG");
 });
 
-app.use("/api/products", productsController);
-app.use("/api/orders", ordersController);
 app.use("/api/auth", authController);
-app.use("/api/message", messagesController);
-app.use("/api/meshulam-test", paymentController);
+app.use("/api/line", linesController);
+app.use("/api/customer", customersController);
+app.use("/api/sms", smsController);
+app.use("/api/admin", adminController);
 
 
 mongoose.connect(config.mongo.url, { retryWrites: true, w: "majority" })
