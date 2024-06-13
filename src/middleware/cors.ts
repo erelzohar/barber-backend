@@ -2,7 +2,7 @@
 import { Request, Response, NextFunction } from "express";
 
 export default function useCors(req: Request, res: Response, next: NextFunction) {
-    const allowedOrigins = ["https://www.donaroma-il.com", "https://meshulam.co.il"];
+    const allowedOrigins = ["https://ez-lines.com"];
     if (process.env.NODE_ENV === "production") {
         if (req.method === "GET") {
             res.header("Access-Control-Allow-Origin", "*");
