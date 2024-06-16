@@ -41,7 +41,7 @@ router.post("/", async (req, res) => {
 router.delete("/:lineId", async (req, res) => {
     try {
         const _id = req.params.lineId;
-        const deleted = await logic.deleteLineAsync(_id);
+        await logic.deleteLineAsync(_id);
         res.sendStatus(204);
     }
     catch (err) {

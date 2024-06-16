@@ -1,6 +1,7 @@
 import express from "express";
 import logic from "../logic/admin-logic";
 import getError from "../helpers/errors-helper";
+import Admin from "../models/Admin";
 
 const router = express.Router();
 
@@ -19,6 +20,13 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
     try {
+        if (req.body._id){
+            const adminToUpsert = new Admin(req.body);
+            if (req.body.vacations) adminToUpsert.vacations = JSON.parse(req.body.vacations);
+            if (req.body.workingDays) adminToUpsert.workingDays = JSON.parse(req.body.workingDays);
+            const response = await logic.updateAdminAsync(adminToUpsert);            
+            res.json(response);
+        }
     }
     catch (err) {
         res.status(500).json(getError(err as Error));
