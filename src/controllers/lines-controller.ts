@@ -9,6 +9,12 @@ const router = express.Router();
 router.get("/", async (req, res) => {
     try {
         const lines = await logic.getAllLinesAsync();
+        lines.forEach(async (line, index) => {
+            if (+line.timestamp < new Date().getTime()) {                
+                await logic.deleteLineAsync(line._id);
+                lines.splice(index, 1);
+            }
+        });
         res.json(lines);
     }
     catch (err) {

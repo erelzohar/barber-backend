@@ -3,7 +3,7 @@ import { config } from "../config";
 import * as Twilio from 'twilio';
 
 
-async function sendSmsAsync(sms: SMS) {    
+async function sendSmsAsync(sms: SMS) {
     const accountSid = process.env.TWILIO_ACCOUNT_SID;
     const authToken = process.env.TWILIO_AUTH_TOKEN;
     const client = Twilio.default(accountSid, authToken)
@@ -13,7 +13,7 @@ async function sendSmsAsync(sms: SMS) {
             from: 'ZIMUN-TORIM',
             to: sms.phoneNumber
         })
-        .then(message => console.log(message.sid));
+        .then(message => message.status);
 }
 
 export default {
