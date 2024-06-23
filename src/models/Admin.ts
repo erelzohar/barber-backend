@@ -4,6 +4,7 @@ interface AdminI {
     message: string;
     vacations: string[];
     workingDays: string[];
+    imagesNames:string[];
     minutesPerLine: number;
     username: string;
     name: string;
@@ -28,6 +29,9 @@ const AdminSchema = new Schema({
     workingDays: {
         type: Array,
         required: [true, "Missing workingDays"]
+    },
+    imagesNames: {
+        type: Array
     },
     minutesPerLine: {
         type: Number,

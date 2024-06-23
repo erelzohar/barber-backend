@@ -1,19 +1,23 @@
 import { SMS } from "../models/SMS";
 import { config } from "../config";
+import axios from "axios";
 import * as Twilio from 'twilio';
 
 
 async function sendSmsAsync(sms: SMS) {
-    const accountSid = process.env.TWILIO_ACCOUNT_SID;
-    const authToken = process.env.TWILIO_AUTH_TOKEN;
-    const client = Twilio.default(accountSid, authToken)
-    client.messages
-        .create({
-            body: sms.message,
-            from: 'ZIMUN-TORIM',
-            to: sms.phoneNumber
-        })
-        .then(message => message.status);
+    const user = config.smsService.user;
+    const pass = config.smsService.pass;
+    const key = config.smsService.key;
+    const sender = config.smsService.sender;
+    axios.post("https://api.sms4free.co.il/ApiSMS/v2/SendSMS",JSON.stringify({
+        key,
+        user,
+        pass,
+        sender,
+        recipient:sms.phoneNumber,
+        msg:Buffer.from(sms.message,"base64").toString()
+    }))
+    .then(res=>res.data);
 }
 
 export default {

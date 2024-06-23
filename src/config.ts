@@ -11,7 +11,10 @@ const BUCKET_REGION = process.env.BUCKET_REGION || "";
 const AWS_SECRET_ACCESS_KEY = process.env.AWS_SECRET_ACCESS_KEY || ""
 const AWS_ACCESS_KEY_ID = process.env.AWS_ACCESS_KEY_ID || ""
 const PORT = process.env.PORT || 3001;
-
+const SMS_USER = process.env.SMS_USER;
+const SMS_KEY = process.env.SMS_Key;
+const SMS_PASS = process.env.SMS_PASS;
+const SMS_SENDER = process.env.SMS_SENDER;
 
 export const config = {
     mongo: {
@@ -26,5 +29,11 @@ export const config = {
         region: BUCKET_REGION,
         secret: AWS_SECRET_ACCESS_KEY,
         accessKey: AWS_ACCESS_KEY_ID
+    },
+    smsService:{
+        user:SMS_USER,
+        key:SMS_KEY,
+        pass:SMS_PASS,
+        sender:SMS_SENDER
     }
 }
