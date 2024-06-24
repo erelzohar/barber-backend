@@ -10,7 +10,7 @@ router.get("/", async (req, res) => {
         const admin = await logic.getAdminDetailsAsync();
         const securedAdmin = admin.toObject();
         delete securedAdmin.username;
-        delete securedAdmin.password;
+        delete securedAdmin.password;        
         res.json(securedAdmin);
     }
     catch (err) {
