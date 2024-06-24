@@ -1,7 +1,6 @@
 import { SMS } from "../models/SMS";
 import { config } from "../config";
 import axios from "axios";
-import * as Twilio from 'twilio';
 
 
 async function sendSmsAsync(sms: SMS) {
@@ -11,6 +10,15 @@ async function sendSmsAsync(sms: SMS) {
     const pass = config.smsService.pass;
     const key = config.smsService.key;
     const sender = config.smsService.sender;
+    console.log(JSON.stringify({
+        key,
+        user,
+        pass,
+        sender,
+        recipient:sms.phoneNumber,
+        msg:Buffer.from(sms.message,"base64").toString()
+    }));
+    
     axios.post("https://api.sms4free.co.il/ApiSMS/v2/SendSMS",JSON.stringify({
         key,
         user,
@@ -19,7 +27,7 @@ async function sendSmsAsync(sms: SMS) {
         recipient:sms.phoneNumber,
         msg:Buffer.from(sms.message,"base64").toString()
     }))
-    .then(res=>res.data);
+    .then(res=>console.log(res.data));
 }
 
 export default {
