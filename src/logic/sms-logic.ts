@@ -11,6 +11,7 @@ async function sendSmsAsync(sms: SMS) {
     const key = config.smsService.key;
     const sender = config.smsService.sender;
     console.log("key --------- ",key);
+    console.log("key --------- ",process.env.SMS_Key);
     
     console.log(JSON.stringify({
         user,
