@@ -12,7 +12,7 @@ const AWS_SECRET_ACCESS_KEY = process.env.AWS_SECRET_ACCESS_KEY || ""
 const AWS_ACCESS_KEY_ID = process.env.AWS_ACCESS_KEY_ID || ""
 const PORT = process.env.PORT || 3001;
 const SMS_USER = process.env.SMS_USER || "";
-const SMS_KEY = process.env.SMS_Key || "";
+const SMS_KEY = process.env.SMS_KEY || "";
 const SMS_PASS = process.env.SMS_PASS || "";
 const SMS_SENDER = process.env.SMS_SENDER || "";
 
