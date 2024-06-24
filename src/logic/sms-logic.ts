@@ -11,8 +11,8 @@ async function sendSmsAsync(sms: SMS) {
     const key = config.smsService.key;
     const sender = config.smsService.sender;
     console.log(JSON.stringify({
-        key,
         user,
+        key,
         pass,
         sender,
         recipient:sms.phoneNumber,
@@ -20,14 +20,14 @@ async function sendSmsAsync(sms: SMS) {
     }));
     
     axios.post("https://api.sms4free.co.il/ApiSMS/v2/SendSMS",JSON.stringify({
-        key,
         user,
+        key,
         pass,
         sender,
         recipient:sms.phoneNumber,
         msg:Buffer.from(sms.message,"base64").toString()
     }))
-    .then(res=>console.log(res.data));
+    .then(res=>res.data);
 }
 
 export default {
