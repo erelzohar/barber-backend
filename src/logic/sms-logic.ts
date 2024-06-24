@@ -10,6 +10,8 @@ async function sendSmsAsync(sms: SMS) {
     const pass = config.smsService.pass;
     const key = config.smsService.key;
     const sender = config.smsService.sender;
+    console.log("key --------- ",key);
+    
     console.log(JSON.stringify({
         user,
         key,

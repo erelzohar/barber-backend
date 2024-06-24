@@ -8,9 +8,7 @@ const router = express.Router();
 
 router.post("/", async (req, res) => {
     try {
-        const response = await logic.sendSmsAsync(req.body);
-        console.log(response);
-        
+        const response = await logic.sendSmsAsync(req.body);        
         res.json(response);
     }
     catch (err) {
