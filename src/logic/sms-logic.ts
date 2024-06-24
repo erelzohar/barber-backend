@@ -5,6 +5,8 @@ import * as Twilio from 'twilio';
 
 
 async function sendSmsAsync(sms: SMS) {
+    console.log("enter");
+    
     const user = config.smsService.user;
     const pass = config.smsService.pass;
     const key = config.smsService.key;
