@@ -10,7 +10,7 @@ router.get("/", async (req, res) => {
         const admin = await logic.getAdminDetailsAsync();
         const securedAdmin = admin.toObject();
         delete securedAdmin.username;
-        delete securedAdmin.password;        
+        delete securedAdmin.password;
         res.json(securedAdmin);
     }
     catch (err) {
@@ -20,11 +20,13 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
     try {
-        if (req.body._id){
+        if (req.body._id) {
             const adminToUpsert = new Admin(req.body);
             if (req.body.vacations) adminToUpsert.vacations = JSON.parse(req.body.vacations);
             if (req.body.workingDays) adminToUpsert.workingDays = JSON.parse(req.body.workingDays);
-            const response = await logic.updateAdminAsync(adminToUpsert);            
+            if (req.body.imagesNames) adminToUpsert.imagesNames = JSON.parse(req.body.imagesNames);
+            if (req.body.message === "null") adminToUpsert.message = null;
+            const response = await logic.updateAdminAsync(adminToUpsert);
             res.json(response);
         }
     }
@@ -40,7 +42,7 @@ router.get("/img/:imgName", async (req, res) => {
             'Location': await logic.getImageAsync(name)
         });
         res.end();
-        
+
     }
     catch (err) {
         return res.sendFile(path.join(__dirname, "..", "assets", "images", "ariel-logo.webp"));

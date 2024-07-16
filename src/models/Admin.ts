@@ -17,10 +17,7 @@ export interface AdminModel extends AdminI, Document<string> { }
 
 const AdminSchema = new Schema({
     message: {
-        type: String,
-        required: [true, "Missing message"],
-        minlength: 2,
-        maxlength: 200
+        type: String
     },
     vacations: {
         type: Array,
