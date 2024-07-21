@@ -25,7 +25,7 @@ router.post("/", async (req, res) => {
             if (req.body.vacations) adminToUpsert.vacations = JSON.parse(req.body.vacations);
             if (req.body.workingDays) adminToUpsert.workingDays = JSON.parse(req.body.workingDays);
             if (req.body.imagesNames) adminToUpsert.imagesNames = JSON.parse(req.body.imagesNames);
-            if (req.body.message === "null") adminToUpsert.message = null;
+            if (req.body.message) adminToUpsert.message = JSON.parse(req.body.message);
             const response = await logic.updateAdminAsync(adminToUpsert);
             res.json(response);
         }

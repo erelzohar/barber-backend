@@ -1,11 +1,15 @@
 import mongoose, { Schema, Document } from "mongoose";
 
 interface AdminI {
-    message: string;
+    message: {
+        value: string;
+        disabled: boolean;
+    };
     vacations: string[];
     workingDays: string[];
     imagesNames:string[];
     minutesPerLine: number;
+    incomePerLine:number;
     username: string;
     name: string;
     password: string;
@@ -17,7 +21,14 @@ export interface AdminModel extends AdminI, Document<string> { }
 
 const AdminSchema = new Schema({
     message: {
-        type: String
+        value: {
+            type: String,
+            required: [true, "Missing message value"]
+        },
+        disabled: {
+            type: Boolean,
+            required: [true, "Missing message disabled"]
+        }
     },
     vacations: {
         type: Array,
@@ -35,6 +46,10 @@ const AdminSchema = new Schema({
         required: [true, "Missing minutesPerLine"],
         min: 15,
         max: 50
+    },
+    incomePerLine: {
+        type: Number,
+        required: [true, "Missing incomePerLine"]
     },
     username: {
         type: String,
