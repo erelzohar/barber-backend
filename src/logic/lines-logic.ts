@@ -1,8 +1,11 @@
 import Line, { LineModel } from "../models/Line";
 
 
-async function getAllLinesAsync() {
-    return Line.find().exec();
+async function getAllLinesAsync(admin_id:string) {
+    return Line.find({admin_id,timestamp:{$gt:new Date().getTime()}}).exec();
+}
+async function getLinesHistoryAsync(admin_id:string) {
+    return Line.find({admin_id,timestamp:{$lt:new Date().getTime()}}).exec();
 }
 async function getLineById(_id: string) {
     return Line.findById(_id).exec();
@@ -19,6 +22,7 @@ async function addLineAsync(line: LineModel) {
 
 export default {
     getAllLinesAsync,
+    getLinesHistoryAsync,
     deleteLineAsync,
     addLineAsync,
     getLineById

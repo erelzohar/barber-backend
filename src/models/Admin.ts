@@ -5,15 +5,31 @@ interface AdminI {
         value: string;
         disabled: boolean;
     };
+    socials: {
+        instagram: string;
+        tiktok: string;
+        facebook: string;
+    },
+    address: {
+        state: string;
+        city: string;
+        street: string;
+        floor: string;
+        aptNum: string;
+    },
     vacations: string[];
     workingDays: string[];
-    imagesNames:string[];
+    imagesNames: string[];
     minutesPerLine: number;
-    incomePerLine:number;
+    minCancelTimeMS: number;
+    incomePerLine: number;
     username: string;
     name: string;
     password: string;
     token: string;
+    businessName: string;
+    descriptions: string[];
+    logoImgName: string;
 
 }
 
@@ -28,6 +44,34 @@ const AdminSchema = new Schema({
         disabled: {
             type: Boolean,
             required: [true, "Missing message disabled"]
+        }
+    },
+    socials: {
+        instagram: {
+            type: String
+        },
+        tiktok: {
+            type: String
+        },
+        facebook: {
+            type: String
+        }
+    },
+    address: {
+        state: {
+            type: String
+        },
+        city: {
+            type: String
+        },
+        street: {
+            type: String
+        },
+        floor: {
+            type: String
+        },
+        aptNum: {
+            type: String
         }
     },
     vacations: {
@@ -47,6 +91,10 @@ const AdminSchema = new Schema({
         min: 15,
         max: 50
     },
+    minCancelTimeMS: {
+        type: Number,
+        required: [true, "Missing minCancelTimeMS"]
+    },
     incomePerLine: {
         type: Number,
         required: [true, "Missing incomePerLine"]
@@ -56,6 +104,12 @@ const AdminSchema = new Schema({
         minlength: [6, "Min 5 characters"],
         maxlength: [500, "Max 50 characters"],
         required: [true, "Missing username"]
+    },
+    password: {
+        type: String,
+        minlength: [6, "Min 6 characters"],
+        maxlength: [500, "Max 500 characters"],
+        required: [true, "Missing password"]
     },
     phone: {
         type: String,
@@ -68,11 +122,21 @@ const AdminSchema = new Schema({
         minlength: [6, "Min 5 characters"],
         maxlength: [500, "Max 50 characters"],
     },
-    password: {
+    logoImgName: {
+        type: String
+    },
+    businessName: {
+        type: String,
+        minlength: [6, "Min 5 characters"],
+        maxlength: [500, "Max 50 characters"],
+    },
+    descriptions: {
+        type: Array
+    },
+    aboutMe: {
         type: String,
         minlength: [6, "Min 6 characters"],
-        maxlength: [500, "Max 500 characters"],
-        required: [true, "Missing password"]
+        maxlength: [500, "Max 500 characters"]
     },
     token: {
         type: String

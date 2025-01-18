@@ -8,10 +8,10 @@ function verifyAdmin(req: Request, res: Response, next: NextFunction) {
         if (!req.headers.authorization) return res.status(403).send("You are not an admin.");
         const token = req.headers.authorization.split(" ")[1];
         const verified = verify(token, config.server.jwtKey);
-        if ((verified as JwtPayload).exp < (Date.now() / 1000)) return res.status(403).send("Your login session has expired.");
-        if (!(verified as JwtPayload).payload.isAdmin) return res.status(403).send("You are not an admin.");
+        // if ((verified as JwtPayload).exp < (Date.now() / 1000)) return res.status(403).send("Your login session has expired.");
+        if (!(verified as JwtPayload).payload) return res.status(403).send("You are not an admin.");
     }
-    catch (err: any) {
+    catch (err: any) {        
         return res.status(403).send("Your login session has expired.");
     }
     next();

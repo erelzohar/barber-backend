@@ -31,6 +31,7 @@ app.use("/api/sms", smsController);
 app.use("/api/admin", adminController);
 
 
+// mongoose.set('debug', true);
 mongoose.connect(config.mongo.url, { retryWrites: true, w: "majority" })
     .then(() => {
         console.log("connected to mongo");

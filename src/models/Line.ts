@@ -4,6 +4,7 @@ export interface ILine {
     name:string;
     phone:string;
     timestamp:string;
+    admin_id:mongoose.Types.ObjectId;
 }
 
 export interface LineModel extends ILine, Document<string> { }
@@ -21,6 +22,11 @@ const LineScheme: Schema = new Schema({
         required: [true, "Missing phone"],
         minlength: [9, "Min 9 characters"],
         maxlength: [13, "Max 13 characters"],
+    },
+    admin_id: {
+        type: Schema.Types.ObjectId,
+        ref: "Admin",
+        required: [true, "Missing admin_id"]
     },
     timestamp: {
         type: String,

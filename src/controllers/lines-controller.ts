@@ -6,13 +6,34 @@ import mongoose from "mongoose";
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/all/:admin_id", async (req, res) => {
     try {
-        const lines = await logic.getAllLinesAsync();
-        lines.forEach(async (line, index) => {
-            if (+line.timestamp < new Date().getTime()) {                
+        const admin_id = req.params.admin_id;
+        const lines = await logic.getAllLinesAsync(admin_id);
+        // lines.forEach(async (line, index) => {
+        //     if (+line.timestamp < new Date().getTime()) {
+        //         console.log(+line.timestamp);
+                
+        //         lines.splice(index, 1);
+        //         if (+line.timestamp < (new Date().getTime() - 2629746000)) {
+        //             await logic.deleteLineAsync(line._id);
+        //         }
+        //     }
+        // });
+        res.json(lines);
+    }
+    catch (err) {
+        res.status(500).json(getError(err as Error));
+    }
+});
+router.get("/history/:admin_id", async (req, res) => {
+    try {
+        const admin_id = req.params.admin_id;
+        const lines = await logic.getLinesHistoryAsync(admin_id);
+        lines.forEach(async (line,index) => {
+            if (+line.timestamp < (new Date().getTime() - 2629746000)) { //more than 1 month 
+                lines.splice(index,1);
                 await logic.deleteLineAsync(line._id);
-                lines.splice(index, 1);
             }
         });
         res.json(lines);
@@ -24,7 +45,7 @@ router.get("/", async (req, res) => {
 router.get("/:lineId", async (req, res) => {
     try {
         const id = req.params.lineId;
-        if (!mongoose.isValidObjectId(id)) return res.sendStatus(404);
+        if (!mongoose.isValidObjectId(id)) return res.sendStatus(204);
         const line = await logic.getLineById(id);
         res.json(line);
     }
