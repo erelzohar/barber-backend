@@ -35,7 +35,7 @@ router.get("/:_id", async (req, res) => {
 
 router.post("/",verifyAdmin, async (req, res) => {
     try {
-        if (req.body._id) { //update            
+        if (req.body._id) { //update    
             const adminToUpsert = new Admin(req.body);
             if (req.body.vacations) adminToUpsert.vacations = JSON.parse(req.body.vacations);
             if (req.body.workingDays) adminToUpsert.workingDays = JSON.parse(req.body.workingDays);

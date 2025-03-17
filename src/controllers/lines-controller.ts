@@ -10,32 +10,25 @@ router.get("/all/:admin_id", async (req, res) => {
     try {
         const admin_id = req.params.admin_id;
         const lines = await logic.getAllLinesAsync(admin_id);
-        // lines.forEach(async (line, index) => {
-        //     if (+line.timestamp < new Date().getTime()) {
-        //         console.log(+line.timestamp);
-                
-        //         lines.splice(index, 1);
-        //         if (+line.timestamp < (new Date().getTime() - 2629746000)) {
-        //             await logic.deleteLineAsync(line._id);
-        //         }
-        //     }
-        // });
+        lines.forEach(async (line, index) => {
+            if (+line.timestamp < new Date().getTime()) {                
+                lines.splice(index, 1);
+                if (+line.timestamp < (new Date().getTime() - 3600000)) {
+                    await logic.deleteLineAsync(line._id);
+                }
+            }
+        });
         res.json(lines);
     }
     catch (err) {
         res.status(500).json(getError(err as Error));
     }
 });
-router.get("/history/:admin_id", async (req, res) => {
+router.get("/history/:admin_id/:history_time", async (req, res) => {
     try {
+        const history_time = req.params.history_time;
         const admin_id = req.params.admin_id;
-        const lines = await logic.getLinesHistoryAsync(admin_id);
-        lines.forEach(async (line,index) => {
-            if (+line.timestamp < (new Date().getTime() - 2629746000)) { //more than 1 month 
-                lines.splice(index,1);
-                await logic.deleteLineAsync(line._id);
-            }
-        });
+        const lines = await logic.getLinesHistoryAsync(admin_id,history_time);
         res.json(lines);
     }
     catch (err) {

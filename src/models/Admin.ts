@@ -22,6 +22,7 @@ interface AdminI {
     imagesNames: string[];
     minutesPerLine: number;
     minCancelTimeMS: number;
+    historySaveTimeMS: number;
     incomePerLine: number;
     username: string;
     name: string;
@@ -94,6 +95,10 @@ const AdminSchema = new Schema({
     minCancelTimeMS: {
         type: Number,
         required: [true, "Missing minCancelTimeMS"]
+    },
+    historySaveTimeMS: {
+        type: Number,
+        required: [true, "Missing historySaveTimeMS"]
     },
     incomePerLine: {
         type: Number,
